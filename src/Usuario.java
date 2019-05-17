@@ -1,9 +1,12 @@
+import java.util.*;
+
 public class Usuario {
 
-	// Atributos
+	// 1. Atributos
 	public int id;
 
-	// Construtor
+	// 2. Construtor
 	public Usuario() {
 	}
+
 }

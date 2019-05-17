@@ -1,6 +1,8 @@
+import java.util.*;
+
 public class Produto {
 	
-	// Atributos
+	// 1. Atributos
 	public int id;
 	public String titulo;
 	private int qtdEstoque;
@@ -8,7 +10,7 @@ public class Produto {
 	public double preco;
 	public String dataEntrada;
 
-	// Construtor
+	// 2. Construtor
 	public Produto(int id, String titulo, double preco, int qtdEstoque, String dataEntrada) {
 		this.id = id;
 		this.titulo = titulo;

@@ -1,7 +1,9 @@
 import java.util.*;
 
 public class Principal {
+
 	public static void main(String[] args) {
+
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
@@ -24,5 +26,7 @@ public class Principal {
 
 		// Imprimir produto ID 1
 		OperadorDados.imprimir(produtos, 1);
+	
 	}
+
 }
