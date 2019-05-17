@@ -1,18 +1,20 @@
 public class Produto {
 	
+	// Atributos
 	public int id;
 	public String titulo;
-	private int numEstoque;
-	private int numVendas;
+	private int qtdEstoque;
+	private int qtdVendas;
 	public double preco;
 	public String dataEntrada;
 
-	public Produto(String titulo, double preco, int numEstoque, String dataEntrada) {
+	// Construtor
+	public Produto(int id, String titulo, double preco, int qtdEstoque, String dataEntrada) {
 		this.id = id;
 		this.titulo = titulo;
 		this.preco = preco;
-		this.numEstoque = numEstoque;
-		numVendas = 0;
+		this.qtdEstoque = qtdEstoque;
+		qtdVendas = 0;
 		this.dataEntrada = dataEntrada;
 	}
 
