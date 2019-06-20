@@ -23,11 +23,12 @@ public class Venda {
 	}
 
 	public void inserirProduto(Produto produto, int quantidade) {
+		int id = produto.getId();
 		String titulo = produto.getTitulo();
 		double preco = produto.getPreco();
 		int qtdEstoque = produto.getQtdEstoque();
 		String dataEntrada = produto.getDataEntrada();
-		ProdutoVenda novoProduto = new ProdutoVenda(produto.getId(), quantidade, titulo, preco, qtdEstoque, dataEntrada);
+		ProdutoVenda novoProduto = new ProdutoVenda(id, quantidade, titulo, preco, qtdEstoque, dataEntrada);
 		lista.add(novoProduto);
 	}
 

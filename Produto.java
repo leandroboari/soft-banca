@@ -9,6 +9,15 @@ public class Produto {
 	protected double preco;
 	protected String dataEntrada;
 
+	public Produto(int id, String titulo, double preco, int qtdEstoque, String dataEntrada) {
+		this.id = id;
+		this.titulo = titulo;
+		this.preco = preco;
+		this.qtdEstoque = qtdEstoque;
+		qtdVendas = 0;
+		this.dataEntrada = dataEntrada;
+	}
+
 	public Produto(String titulo, double preco, int qtdEstoque, String dataEntrada) {
 		this.id = ++lastId;
 		this.titulo = titulo;
