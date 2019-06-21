@@ -176,14 +176,14 @@ public class InterfaceEstoque extends Pagina {
 			tfTitulo.setText(produto.getTitulo());
 			tfPreco.setText(String.valueOf(produto.getPreco()));
 			tfEstoque.setText(String.valueOf(produto.getQtdEstoque()));
-			ld = LocalDate.parse(produto.getDataEntrada(), Conversor.dateFormatter);
+			ld = LocalDate.parse(produto.getDataEntrada(), Conversor.formataData);
 			tfData.setValue(ld);
 		}
 		tfData.setConverter(new StringConverter<LocalDate>() {
 			@Override
 			public String toString(LocalDate date) {
 				if (date != null) {
-					return Conversor.dateFormatter.format(date);
+					return Conversor.formataData.format(date);
 				} else {
 					return "";
 				}
@@ -191,7 +191,7 @@ public class InterfaceEstoque extends Pagina {
 			@Override
 			public LocalDate fromString(String string) {
 				if (string != null && !string.isEmpty()) {
-					return LocalDate.parse(string, Conversor.dateFormatter);
+					return LocalDate.parse(string, Conversor.formataData);
 				} else {
 					return null;
 				}

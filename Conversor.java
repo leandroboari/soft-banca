@@ -1,11 +1,18 @@
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 import java.math.RoundingMode;
+
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.DateTimeException;
+
+import java.util.Locale;
 
 public class Conversor {
 
-	public static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	// Formato padrão de data
+	public static DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	/**
 	* Método que converte com segurança uma String para Double
@@ -48,7 +55,7 @@ public class Conversor {
 
 	public static LocalDate StringParaData(String valor) {
 		try {
-			return LocalDate.parse(valor, dateFormatter);
+			return LocalDate.parse(valor, formataData);
 		} catch (DateTimeException nfe) {
 			Alerta.erro("A conversão do texto para data falhou.");
 			return null;
@@ -64,7 +71,7 @@ public class Conversor {
 
 	public static String DataParaString(LocalDate valor) {
 		try {
-			return Conversor.dateFormatter.format(valor);
+			return Conversor.formataData.format(valor);
 		} catch (DateTimeException nfe) {
 			Alerta.erro("A conversão de data para texto falhou.");
 			return null;
@@ -80,19 +87,23 @@ public class Conversor {
 	*/
 
 	public static String DoubleParaPreco(Double valor) {
+		Locale locale  = new Locale("pt", "BR");
+		DecimalFormatSymbols simbolos = new DecimalFormatSymbols(locale);
+		simbolos.setDecimalSeparator(',');
+		simbolos.setGroupingSeparator('.');
+
+		// Formato padrão de 2 casas decimais
+		DecimalFormat formataPreco = new DecimalFormat("###,###.00", simbolos);
+
 		try {
-
-			// Formato para 2 casas decimais
-			private static DecimalFormat df = new DecimalFormat("#.##");
-
 			// Aredondamento sempre para cima
-			df.setRoundingMode(RoundingMode.UP);
+			formataPreco.setRoundingMode(RoundingMode.UP);
 
-			return "R$ " + String.valueOf(df.format(valor));
+			return "R$ " + formataPreco.format(valor);
 
 		} catch (NumberFormatException nfe) {
 			Alerta.erro("A conversão de decimal para um valor em dinheiro falhou.");
-			return 0;
+			return "R$ 0,00";
 		}
 	}
 

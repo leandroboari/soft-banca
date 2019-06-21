@@ -219,6 +219,6 @@ public class InterfaceVender extends Pagina {
 	}
 
 	private void atualizaTotal() {
-		tTotal.setText("R$ " + String.valueOf(venda.getTotal()));
+		tTotal.setText(Conversor.DoubleParaPreco(venda.getTotal()));
 	}
 }
