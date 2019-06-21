@@ -1,5 +1,6 @@
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.*;
@@ -22,6 +23,7 @@ public class InterfaceVender extends Pagina {
 	private Venda venda;
 
 	private TextField tfBusca;
+	private Text tTotal;
 
 	public InterfaceVender(Layout layout, OperadorProduto operadorProduto) {
 		super(layout);
@@ -32,11 +34,6 @@ public class InterfaceVender extends Pagina {
 
 		// Instanciar nova venda
 		venda = new Venda();
-
-		SplitPane splitPane = new SplitPane();
-		splitPane.prefHeightProperty().bind(layout.conteudo.heightProperty());
-
-		super.layout.conteudo.getChildren().add(splitPane);
 
 		// Lado esquerdo
 
@@ -87,11 +84,17 @@ public class InterfaceVender extends Pagina {
 
 		// Lado direito
 
-		// Barra de opções
+		// Botão para Finalizar Caixa
 		Button btnFinalizar = new Button("Finalizar caixa");
+
+		// Total
+		tTotal = new Text("R$ 0,00");
+		tTotal.getStyleClass().add("total");
 		
+		// Opções do Caixa
 		BorderPane barraCaixa = new BorderPane();
 		barraCaixa.getStyleClass().add("barraOpcoes");
+		barraCaixa.setLeft(tTotal);
 		barraCaixa.setRight(btnFinalizar);
 
 		// Tabela
@@ -120,7 +123,10 @@ public class InterfaceVender extends Pagina {
 		conteudoCaixa.setCenter(tblCaixa);
 
 		// Divisão do conteúdo
+		SplitPane splitPane = new SplitPane();
+		splitPane.prefHeightProperty().bind(layout.conteudo.heightProperty());
 		splitPane.getItems().addAll(conteudoListaProdutos, conteudoCaixa);
+		super.layout.conteudo.getChildren().add(splitPane);
 	}
 
 	private void realizarBusca(String filtro) {
@@ -134,7 +140,7 @@ public class InterfaceVender extends Pagina {
 		}
 	}
 
-	public void solicitaQuantidade(Produto produto) {
+	private void solicitaQuantidade(Produto produto) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Quantidade");
 		dialog.setHeaderText("Adicione a quantidade:");
@@ -202,10 +208,17 @@ public class InterfaceVender extends Pagina {
 		
 		// Caso tenha em caixa, adiciona quantidade
 		if(produtoEmCaixa != null)
-			produtoEmCaixa.adicionaQuantidade(quantidade);
+			venda.inserirQuantidade(produtoEmCaixa, quantidade);
 
 		// caso não tenha, o Produto será adicionado em Venda como ProdutoVenda
-		else venda.inserirProduto(produto, quantidade);
+		else
+			venda.inserirProduto(produto, quantidade);
 
+		// Atualiza Texto com o Total da Venda
+		atualizaTotal();
+	}
+
+	private void atualizaTotal() {
+		tTotal.setText("R$ " + String.valueOf(venda.getTotal()));
 	}
 }
