@@ -20,6 +20,7 @@ public class Venda {
 
 	public void inserirProduto(ProdutoVenda produto) {
 		lista.add(produto);
+		atualizaTotal();
 	}
 
 	public void inserirProduto(Produto produto, int quantidade) {
@@ -30,14 +31,28 @@ public class Venda {
 		String dataEntrada = produto.getDataEntrada();
 		ProdutoVenda novoProduto = new ProdutoVenda(id, quantidade, titulo, preco, qtdEstoque, dataEntrada);
 		lista.add(novoProduto);
+		atualizaTotal();
 	}
 
 	public void removeProduto(ProdutoVenda produto) {
-		lista.remove(lista);
+		lista.remove(produto);
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+	public void inserirQuantidade(Produto produto, int quantidade) {
+		int posicao = lista.indexOf(produto);
+		lista.get(posicao).inserirQuantidade(quantidade);
+		atualizaTotal();
+	}
+
+	private void atualizaTotal() {
+		total = 0;
+		for(ProdutoVenda produto: lista) {
+			total += produto.getQuantidade() * produto.getPreco();
+		}
+	}
+
+	public double getTotal() {
+		return total;
 	}
 
 }

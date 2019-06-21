@@ -49,6 +49,11 @@
 	-fx-font-size: 16;
 }
 
+.total {
+	-fx-fill: #ddd;
+	-fx-font-size: 26;
+}
+
 .box {
 	-fx-background-color: #363636;
 	-fx-border-width: 1;

@@ -15,7 +15,7 @@ public class ProdutoVenda extends Produto {
 		return quantidade;
 	}
 
-	public void adicionaQuantidade(int quantidade) {
+	public void inserirQuantidade(int quantidade) {
 		this.quantidade += quantidade;
 	}
 
