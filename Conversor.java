@@ -93,7 +93,7 @@ public class Conversor {
 		simbolos.setGroupingSeparator('.');
 
 		// Formato padrão de 2 casas decimais
-		DecimalFormat formataPreco = new DecimalFormat("###,###.00", simbolos);
+		DecimalFormat formataPreco = new DecimalFormat("###,##0.00", simbolos);
 
 		try {
 			// Aredondamento sempre para cima
