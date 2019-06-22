@@ -7,15 +7,19 @@ public class Venda {
 	public ArrayList<ProdutoVenda> lista;
 	private double total;
 	private boolean finalizada;
+	private Date data;
+	private MeioPagamento meioPagamento;
 
 	public Venda() {
 		id = ++lastId;
 		finalizada = false;
+		data = null;
 		lista = new ArrayList<ProdutoVenda>();
 	}
 
 	public void finalizar() {
 		finalizada = true;
+		data = new Date();
 	}
 
 	public void inserirProduto(ProdutoVenda produto) {
@@ -53,6 +57,23 @@ public class Venda {
 
 	public double getTotal() {
 		return total;
+	}
+
+	public boolean vazia() {
+		if(lista.size() == 0) return true;
+		return false;
+	}
+
+	public void setMeioPagamento(MeioPagamento meioPagamento) {
+		this.meioPagamento = meioPagamento;
+	}
+
+	public MeioPagamento getMeioPagamento() {
+		return meioPagamento;
+	}
+
+	public static double calcularTroco(double preco, double valor) {
+		return valor - preco;
 	}
 
 }

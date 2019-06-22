@@ -106,5 +106,4 @@ public class Conversor {
 			return "R$ 0,00";
 		}
 	}
-
 }

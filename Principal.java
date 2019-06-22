@@ -9,8 +9,11 @@ public class Principal extends Application {
 	private Layout layout;
 	private Pagina pagina;
 
-	// Classe para operar a classe Produto
-	OperadorProduto operadorProduto;
+	// Classe para operar as vendas
+	private OperadorVenda operadorVenda;
+
+	// Classe para operar o estoque
+	private OperadorProduto operadorProduto;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -25,7 +28,10 @@ public class Principal extends Application {
 		// Carrega Página Inicial
 		pagina = new InterfaceInicial(layout);
 
-		// Instancia operador de Produtos
+		// Instancia operador de vendas
+		operadorVenda = new OperadorVenda();
+
+		// Instancia operador de produtos
 		operadorProduto = new OperadorProduto();
 
 		// Navegação
@@ -34,7 +40,7 @@ public class Principal extends Application {
 		});
 
 		layout.btnVender.setOnAction(e -> {
-			pagina = new InterfaceVender(layout, operadorProduto);
+			pagina = new InterfaceVender(layout, operadorVenda, operadorProduto);
 		});
 
 		layout.btnEstoque.setOnAction(e -> {

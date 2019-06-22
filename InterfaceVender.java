@@ -1,15 +1,21 @@
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.text.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.event.*;
 import javafx.geometry.Insets;
 import javafx.util.StringConverter;
 import java.time.LocalDate;
 import java.util.*;
+import javafx.scene.control.*;
 import javafx.scene.control.ButtonBar.*;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.*;
+import javafx.scene.text.*;
+import javafx.scene.layout.*;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
 
 public class InterfaceVender extends Pagina {
 
@@ -17,6 +23,7 @@ public class InterfaceVender extends Pagina {
 	public static final Image icone = new Image("img/menu-vender.png");
 
 	private OperadorProduto operadorProduto;
+	private OperadorVenda operadorVenda;
 
 	private TableView<Produto> tblListaProdutos;
 	private TableView<ProdutoVenda> tblCaixa;
@@ -25,12 +32,13 @@ public class InterfaceVender extends Pagina {
 	private TextField tfBusca;
 	private Text tTotal;
 
-	public InterfaceVender(Layout layout, OperadorProduto operadorProduto) {
+	public InterfaceVender(Layout layout, OperadorVenda operadorVenda, OperadorProduto operadorProduto) {
 		super(layout);
 		super.alteraTitulo(titulo);
 		super.selecionaBotao(layout.btnVender);
 
 		this.operadorProduto = operadorProduto;
+		this.operadorVenda = operadorVenda;
 
 		// Instanciar nova venda
 		venda = new Venda();
@@ -38,10 +46,23 @@ public class InterfaceVender extends Pagina {
 		// Lado esquerdo
 
 		// Barra de opções
+
+		// Campo de busca
 		tfBusca = new TextField();
 		tfBusca.setPromptText("Insira a ID ou o Título");
+		
+		// Botão de busca
 		Button btnBuscar = new Button("Buscar");
 		HBox.setHgrow(tfBusca, Priority.ALWAYS);
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				tfBusca.requestFocus();
+			}
+		});
+
+		// Barra de Busca
 		HBox barraListaProdutos = new HBox();
 		barraListaProdutos.getStyleClass().add("barraOpcoes");
 		barraListaProdutos.getChildren().addAll(tfBusca, btnBuscar);
@@ -57,24 +78,28 @@ public class InterfaceVender extends Pagina {
 		tblListaProdutos = new TableView<Produto>();
 		tblListaProdutos.setPlaceholder(new Label("É necessário inserir uma ID ou título."));
 
-		// Define Colunas
+		// Coluna ID
 		TableColumn<Produto, Integer> colunaId1 = new TableColumn<Produto, Integer>("ID");
 		colunaId1.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("id"));
 		tblListaProdutos.getColumns().add(colunaId1);
 
+		// Coluna Título
 		TableColumn<Produto, String> colunaTitulo1 = new TableColumn<Produto, String>("Título");
 		colunaTitulo1.setCellValueFactory(new PropertyValueFactory<Produto, String>("titulo"));
 		tblListaProdutos.getColumns().add(colunaTitulo1);
 
+		// Coluna Preço
 		TableColumn<Produto, Double> colunaPreco1 = new TableColumn<Produto, Double>("Preço");
 		colunaPreco1.setCellValueFactory(new PropertyValueFactory<Produto, Double>("preco"));
 		tblListaProdutos.getColumns().add(colunaPreco1);
 
+		// Conteúdo Esquerdo
 		BorderPane conteudoListaProdutos = new BorderPane();
 		conteudoListaProdutos.setStyle("-fx-padding: 0 5 0 0");
 		conteudoListaProdutos.setTop(barraListaProdutos);
 		conteudoListaProdutos.setCenter(tblListaProdutos);
 
+		// Ao selecionar uma célula da tabela de Produto
 		tblListaProdutos.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
 				Produto produtoSelecionado = tblListaProdutos.getSelectionModel().getSelectedItem();
@@ -85,7 +110,7 @@ public class InterfaceVender extends Pagina {
 		// Lado direito
 
 		// Botão para Finalizar Caixa
-		Button btnFinalizar = new Button("Finalizar caixa");
+		Button btnFinalizarCaixa = new Button("Finalizar caixa");
 
 		// Total
 		tTotal = new Text("R$ 0,00");
@@ -95,32 +120,56 @@ public class InterfaceVender extends Pagina {
 		BorderPane barraCaixa = new BorderPane();
 		barraCaixa.getStyleClass().add("barraOpcoes");
 		barraCaixa.setLeft(tTotal);
-		barraCaixa.setRight(btnFinalizar);
+		barraCaixa.setRight(btnFinalizarCaixa);
 
 		// Tabela
 		tblCaixa = new TableView<ProdutoVenda>();
 		tblCaixa.setPlaceholder(new Label("Aguardando a seleção de um produto."));
 
+		// Coluna Qtd.
 		TableColumn<ProdutoVenda, Integer> colunaQtd2 = new TableColumn<ProdutoVenda, Integer>("Qtd.");
 		colunaQtd2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Integer>("quantidade"));
 		tblCaixa.getColumns().add(colunaQtd2);
 
+		// Coluna ID
 		TableColumn<ProdutoVenda, Integer> colunaId2 = new TableColumn<ProdutoVenda, Integer>("ID");
 		colunaId2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Integer>("id"));
 		tblCaixa.getColumns().add(colunaId2);
 
+		// Coluna Título
 		TableColumn<ProdutoVenda, String> colunaTitulo2 = new TableColumn<ProdutoVenda, String>("Título");
 		colunaTitulo2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, String>("titulo"));
 		tblCaixa.getColumns().add(colunaTitulo2);
 
+		// Coluna Preço
 		TableColumn<ProdutoVenda, Double> colunaPreco2 = new TableColumn<ProdutoVenda, Double>("Preço");
 		colunaPreco2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Double>("preco"));
 		tblCaixa.getColumns().add(colunaPreco2);
 
+		// Conteúdo Direito
 		BorderPane conteudoCaixa = new BorderPane();
 		conteudoCaixa.setStyle("-fx-padding: 0 0 0 5");
 		conteudoCaixa.setTop(barraCaixa);
 		conteudoCaixa.setCenter(tblCaixa);
+
+		// Ao selecionar uma célula da tabela de ProdutoVenda
+		tblCaixa.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if (newSelection != null) {
+				ProdutoVenda produtoSelecionado = tblCaixa.getSelectionModel().getSelectedItem();
+				
+			}
+		});
+
+		// Botão Finalizar Venda
+		btnFinalizarCaixa.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				if(venda.vazia()) {
+					Alerta.erro("Não foram inseridos produtos no caixa.");
+				} else {
+					solicitaPagamento();
+				}
+			}
+		});
 
 		// Divisão do conteúdo
 		SplitPane splitPane = new SplitPane();
@@ -144,15 +193,29 @@ public class InterfaceVender extends Pagina {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Quantidade");
 		dialog.setHeaderText("Adicione a quantidade:");
-		// Botões
-		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
-		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
-		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar, btnCancelar);
+
+		// Campo com a quantidade
 		TextField tfQuantidade = new TextField();
+
+		// Invoca foco no campo de texto
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				tfQuantidade.requestFocus();
+			}
+		});
+
+		// Caixa de conteúdo
 		HBox conteudo = new HBox();
 		conteudo.setPadding(new Insets(10));
 		conteudo.getChildren().add(tfQuantidade);
 		dialog.getDialogPane().setContent(conteudo);
+
+		// Botões
+		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
+		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
+		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar, btnCancelar);
+		
 		Button getBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
 		getBtnFinalizar.addEventFilter(ActionEvent.ACTION, event -> {
 			ArrayList<String> erros = new ArrayList<String>();
@@ -165,6 +228,7 @@ public class InterfaceVender extends Pagina {
 				event.consume();
 			}
 		});
+
 		Optional<ButtonType> resultado = dialog.showAndWait();
 		if(resultado.get() == btnFinalizar) {
 
@@ -220,5 +284,45 @@ public class InterfaceVender extends Pagina {
 
 	private void atualizaTotal() {
 		tTotal.setText(Conversor.DoubleParaPreco(venda.getTotal()));
+	}
+
+	private void solicitaPagamento() {
+		Dialog<ButtonType> dialog = new Dialog<>();
+		dialog.setTitle("Pagamento");
+		dialog.setHeaderText("Informação de pagamento");
+
+		VBox conteudo = new VBox();
+		conteudo.setSpacing(5);
+
+		ToggleGroup tgMeioPagamento = new ToggleGroup();
+
+		int numMeiosPagamento = 0;
+		for(MeioPagamento mp: operadorVenda.meiosPagamento) {
+			RadioButton rb = new RadioButton(mp.getNome());
+			rb.setUserData(mp.getNome());
+			rb.setToggleGroup(tgMeioPagamento);
+			conteudo.getChildren().add(rb);
+			if(numMeiosPagamento == 0) rb.setSelected(true);
+			numMeiosPagamento++;
+		}
+
+		// tgMeioPagamento.getSelectedToggle().getUserData().toString()
+
+		dialog.getDialogPane().setContent(conteudo);
+
+		// Botões
+		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
+		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
+		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar, btnCancelar);
+		
+		Button getBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
+		getBtnFinalizar.addEventFilter(ActionEvent.ACTION, event -> {
+			
+		});
+
+		Optional<ButtonType> resultado = dialog.showAndWait();
+		if(resultado.get() == btnFinalizar) {
+
+		}
 	}
 }
