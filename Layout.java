@@ -22,8 +22,9 @@ public class Layout {
 
 	// Botões Menu
 	public Button btnInicial;
-	public Button btnVender;
+	public Button btnCaixa;
 	public Button btnEstoque;
+	public Button btnVendas;
 
 	public Layout(Stage stage) {
 		this.stage = stage;
@@ -59,13 +60,17 @@ public class Layout {
 		btnInicial.getStyleClass().add("menuBotao");
 		menu.getChildren().add(btnInicial);
 
-		btnVender = new Button(InterfaceVender.titulo, new ImageView(InterfaceVender.icone));
-		btnVender.getStyleClass().add("menuBotao");
-		menu.getChildren().add(btnVender);
+		btnCaixa = new Button(InterfaceCaixa.titulo, new ImageView(InterfaceCaixa.icone));
+		btnCaixa.getStyleClass().add("menuBotao");
+		menu.getChildren().add(btnCaixa);
 
 		btnEstoque = new Button(InterfaceEstoque.titulo, new ImageView(InterfaceEstoque.icone));
 		btnEstoque.getStyleClass().add("menuBotao");
 		menu.getChildren().add(btnEstoque);
+
+		btnVendas = new Button(InterfaceVendas.titulo, new ImageView(InterfaceVendas.icone));
+		btnVendas.getStyleClass().add("menuBotao");
+		menu.getChildren().add(btnVendas);
 
 		barraLateral.getChildren().add(menu);
 	}
