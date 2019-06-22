@@ -1,5 +1,8 @@
 import java.math.RoundingMode;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -13,6 +16,7 @@ public class Conversor {
 
 	// Formato padrão de data
 	public static DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	public static DateFormat formataDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	/**
 	* Método que converte com segurança uma String para Double
@@ -64,14 +68,31 @@ public class Conversor {
 
 	/**
 	* Método que converte com segurança uma Data para String
-	* @param valor Data a ser convertida
+	* @param data Data a ser convertida
 	* @return String passado pela Data
 	* @author Leandro Boari Naves Silva
 	*/
 
-	public static String DataParaString(LocalDate valor) {
+	public static String DataParaString(LocalDate data) {
 		try {
-			return Conversor.formataData.format(valor);
+			return Conversor.formataData.format(data);
+		} catch (DateTimeException nfe) {
+			Alerta.erro("A conversão de data para texto falhou.");
+			return null;
+		}
+		
+	}
+
+	/**
+	* Método que converte com segurança uma Data para String contendo Data e Hora
+	* @param data Data a ser convertida
+	* @return String passado pela Data
+	* @author Leandro Boari Naves Silva
+	*/
+
+	public static String DataHoraParaString(Date data) {
+		try {
+			return Conversor.formataDataHora.format(data);
 		} catch (DateTimeException nfe) {
 			Alerta.erro("A conversão de data para texto falhou.");
 			return null;
