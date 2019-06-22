@@ -17,8 +17,19 @@ public class OperadorVenda {
 
 	}
 
-	public void inserirVenda(Venda venda) {
+	private void inserirVenda(Venda venda) {
 		vendas.add(venda);
+	}
+
+	public void finalizarVenda(Venda venda, String meioPagamento) {
+		for(MeioPagamento mp: meiosPagamento) {
+			if(mp.getNome().equals(meioPagamento)) {
+				venda.setMeioPagamento(mp);
+				return;
+			}
+		}
+		venda.finalizar();
+		inserirVenda(venda);
 	}
 
 }

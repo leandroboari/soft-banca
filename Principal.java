@@ -13,7 +13,7 @@ public class Principal extends Application {
 	private OperadorVenda operadorVenda;
 
 	// Classe para operar o estoque
-	private OperadorProduto operadorProduto;
+	private OperadorEstoque operadorEstoque;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -32,19 +32,23 @@ public class Principal extends Application {
 		operadorVenda = new OperadorVenda();
 
 		// Instancia operador de produtos
-		operadorProduto = new OperadorProduto();
+		operadorEstoque = new OperadorEstoque();
 
 		// Navegação
 		layout.btnInicial.setOnAction(e -> {
 			pagina = new InterfaceInicial(layout);
 		});
 
-		layout.btnVender.setOnAction(e -> {
-			pagina = new InterfaceVender(layout, operadorVenda, operadorProduto);
+		layout.btnCaixa.setOnAction(e -> {
+			pagina = new InterfaceCaixa(layout, operadorVenda, operadorEstoque);
 		});
 
 		layout.btnEstoque.setOnAction(e -> {
-			pagina = new InterfaceEstoque(layout, operadorProduto);
+			pagina = new InterfaceEstoque(layout, operadorEstoque);
+		});
+
+		layout.btnVendas.setOnAction(e -> {
+			pagina = new InterfaceVendas(layout);
 		});
 
 	}

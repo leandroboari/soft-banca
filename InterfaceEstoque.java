@@ -14,15 +14,15 @@ public class InterfaceEstoque extends Pagina {
 	public static final String titulo = "Estoque";
 	public static final Image icone = new Image("img/menu-estoque.png");
 
-	private OperadorProduto operadorProduto;
+	private OperadorEstoque operadorEstoque;
 	private TableView<Produto> tabela;
 
-	public InterfaceEstoque(Layout layout, OperadorProduto operadorProduto) {
+	public InterfaceEstoque(Layout layout, OperadorEstoque operadorEstoque) {
 		super(layout);
 		super.alteraTitulo(titulo);
 		super.selecionaBotao(layout.btnEstoque);
 
-		this.operadorProduto = operadorProduto;
+		this.operadorEstoque = operadorEstoque;
 
 		// Barra de Opções
 
@@ -39,7 +39,7 @@ public class InterfaceEstoque extends Pagina {
 
 		// Campo de texto e botão
 		TextField tfBusca = new TextField();
-		tfBusca.setPromptText("Insira a ID ou o Título");
+		tfBusca.setPromptText("Filtre pela ID ou Título");
 		Button btnBuscar = new Button("Buscar");
 
 		// Busca
@@ -115,7 +115,7 @@ public class InterfaceEstoque extends Pagina {
 					Alerta.erro("Por favor, é necessário selecionar um produto.");
 				} else {
 					if(Alerta.confirmacao("Você realmente deseja deletar este item?")) {
-						operadorProduto.remover(produtoSelecionado);
+						operadorEstoque.remover(produtoSelecionado);
 						atualizarTabela();
 					}
 				}
@@ -229,12 +229,12 @@ public class InterfaceEstoque extends Pagina {
 		Optional<ButtonType> resultado = dialog.showAndWait();
 		if(resultado.get() == btnFinalizar) {
 			if(produto == null) {
-				operadorProduto.adicionar(new Produto(tfTitulo.getText(),
+				operadorEstoque.adicionar(new Produto(tfTitulo.getText(),
 							Conversor.StringParaDouble(tfPreco.getText()),
 							Conversor.StringParaInt(tfEstoque.getText()),
 							Conversor.DataParaString(tfData.getValue())));
 			} else {
-				operadorProduto.editar(produto, tfTitulo.getText(),
+				operadorEstoque.editar(produto, tfTitulo.getText(),
 								Conversor.StringParaDouble(tfPreco.getText()),
 								Conversor.StringParaInt(tfEstoque.getText()),
 								Conversor.DataParaString(tfData.getValue()));
@@ -277,7 +277,7 @@ public class InterfaceEstoque extends Pagina {
 
 	private void atualizarTabela() {
 		tabela.getItems().clear();
-		for (Produto produto: operadorProduto.lista) {
+		for (Produto produto: operadorEstoque.lista) {
 			tabela.getItems().add(produto);
 		}
 	}
@@ -288,7 +288,7 @@ public class InterfaceEstoque extends Pagina {
 			return;
 		}
 		tabela.getItems().clear();
-		for (Produto produto: operadorProduto.lista) {
+		for (Produto produto: operadorEstoque.lista) {
 			String titulo = produto.getTitulo();
 			String id = String.valueOf(produto.getId());
 			if(titulo.indexOf(filtro) != -1 || id.indexOf(filtro) != -1) {

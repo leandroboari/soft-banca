@@ -16,8 +16,9 @@ public class Pagina {
 	// Método ao clicar nos botões
 	protected void selecionaBotao(Button btn) {
 		layout.btnInicial.getStyleClass().remove("menuBotaoSelecionado");
-		layout.btnVender.getStyleClass().remove("menuBotaoSelecionado");
+		layout.btnCaixa.getStyleClass().remove("menuBotaoSelecionado");
 		layout.btnEstoque.getStyleClass().remove("menuBotaoSelecionado");
+		layout.btnVendas.getStyleClass().remove("menuBotaoSelecionado");
 		btn.getStyleClass().add("menuBotaoSelecionado");
 		limpaConteudo();
 	}

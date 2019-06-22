@@ -11,13 +11,14 @@ public class Venda {
 	private MeioPagamento meioPagamento;
 
 	public Venda() {
-		id = ++lastId;
+		id = 0;
 		finalizada = false;
 		data = null;
 		lista = new ArrayList<ProdutoVenda>();
 	}
 
 	public void finalizar() {
+		id = ++lastId;
 		finalizada = true;
 		data = new Date();
 	}
@@ -70,10 +71,6 @@ public class Venda {
 
 	public MeioPagamento getMeioPagamento() {
 		return meioPagamento;
-	}
-
-	public static double calcularTroco(double preco, double valor) {
-		return valor - preco;
 	}
 
 }

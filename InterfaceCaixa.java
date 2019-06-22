@@ -1,4 +1,3 @@
-
 import javafx.event.*;
 import javafx.geometry.Insets;
 import javafx.util.StringConverter;
@@ -17,12 +16,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
 
-public class InterfaceVender extends Pagina {
+public class InterfaceCaixa extends Pagina {
 
-	public static final String titulo = "Vender";
-	public static final Image icone = new Image("img/menu-vender.png");
+	public static final String titulo = "Caixa";
+	public static final Image icone = new Image("img/menu-caixa.png");
 
-	private OperadorProduto operadorProduto;
+	private OperadorEstoque operadorEstoque;
 	private OperadorVenda operadorVenda;
 
 	private TableView<Produto> tblListaProdutos;
@@ -32,16 +31,16 @@ public class InterfaceVender extends Pagina {
 	private TextField tfBusca;
 	private Text tTotal;
 
-	public InterfaceVender(Layout layout, OperadorVenda operadorVenda, OperadorProduto operadorProduto) {
+	public InterfaceCaixa(Layout layout, OperadorVenda operadorVenda, OperadorEstoque operadorEstoque) {
 		super(layout);
 		super.alteraTitulo(titulo);
-		super.selecionaBotao(layout.btnVender);
+		super.selecionaBotao(layout.btnCaixa);
 
-		this.operadorProduto = operadorProduto;
+		this.operadorEstoque = operadorEstoque;
 		this.operadorVenda = operadorVenda;
 
 		// Instanciar nova venda
-		venda = new Venda();
+		novaVenda();
 
 		// Lado esquerdo
 
@@ -49,18 +48,11 @@ public class InterfaceVender extends Pagina {
 
 		// Campo de busca
 		tfBusca = new TextField();
-		tfBusca.setPromptText("Insira a ID ou o Título");
+		tfBusca.setPromptText("ID ou Título de um Produto");
 		
 		// Botão de busca
 		Button btnBuscar = new Button("Buscar");
 		HBox.setHgrow(tfBusca, Priority.ALWAYS);
-
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				tfBusca.requestFocus();
-			}
-		});
 
 		// Barra de Busca
 		HBox barraListaProdutos = new HBox();
@@ -81,16 +73,19 @@ public class InterfaceVender extends Pagina {
 		// Coluna ID
 		TableColumn<Produto, Integer> colunaId1 = new TableColumn<Produto, Integer>("ID");
 		colunaId1.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("id"));
+		colunaId1.setPrefWidth(35);
 		tblListaProdutos.getColumns().add(colunaId1);
 
 		// Coluna Título
 		TableColumn<Produto, String> colunaTitulo1 = new TableColumn<Produto, String>("Título");
 		colunaTitulo1.setCellValueFactory(new PropertyValueFactory<Produto, String>("titulo"));
+		colunaTitulo1.setPrefWidth(170);
 		tblListaProdutos.getColumns().add(colunaTitulo1);
 
 		// Coluna Preço
 		TableColumn<Produto, Double> colunaPreco1 = new TableColumn<Produto, Double>("Preço");
 		colunaPreco1.setCellValueFactory(new PropertyValueFactory<Produto, Double>("preco"));
+		colunaPreco1.setPrefWidth(50);
 		tblListaProdutos.getColumns().add(colunaPreco1);
 
 		// Conteúdo Esquerdo
@@ -115,7 +110,7 @@ public class InterfaceVender extends Pagina {
 		// Total
 		tTotal = new Text("R$ 0,00");
 		tTotal.getStyleClass().add("total");
-		
+
 		// Opções do Caixa
 		BorderPane barraCaixa = new BorderPane();
 		barraCaixa.getStyleClass().add("barraOpcoes");
@@ -129,21 +124,25 @@ public class InterfaceVender extends Pagina {
 		// Coluna Qtd.
 		TableColumn<ProdutoVenda, Integer> colunaQtd2 = new TableColumn<ProdutoVenda, Integer>("Qtd.");
 		colunaQtd2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Integer>("quantidade"));
+		colunaQtd2.setPrefWidth(40);
 		tblCaixa.getColumns().add(colunaQtd2);
 
 		// Coluna ID
 		TableColumn<ProdutoVenda, Integer> colunaId2 = new TableColumn<ProdutoVenda, Integer>("ID");
 		colunaId2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Integer>("id"));
+		colunaId2.setPrefWidth(30);
 		tblCaixa.getColumns().add(colunaId2);
 
 		// Coluna Título
 		TableColumn<ProdutoVenda, String> colunaTitulo2 = new TableColumn<ProdutoVenda, String>("Título");
 		colunaTitulo2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, String>("titulo"));
+		colunaTitulo2.setPrefWidth(150);
 		tblCaixa.getColumns().add(colunaTitulo2);
 
 		// Coluna Preço
 		TableColumn<ProdutoVenda, Double> colunaPreco2 = new TableColumn<ProdutoVenda, Double>("Preço");
 		colunaPreco2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Double>("preco"));
+		colunaId2.setPrefWidth(45);
 		tblCaixa.getColumns().add(colunaPreco2);
 
 		// Conteúdo Direito
@@ -180,7 +179,7 @@ public class InterfaceVender extends Pagina {
 
 	private void realizarBusca(String filtro) {
 		tblListaProdutos.getItems().clear();
-		for (Produto produto: operadorProduto.lista) {
+		for (Produto produto: operadorEstoque.lista) {
 			String titulo = produto.getTitulo();
 			String id = String.valueOf(produto.getId());
 			if(titulo.indexOf(filtro) != -1 || id.indexOf(filtro) != -1) {
@@ -195,7 +194,7 @@ public class InterfaceVender extends Pagina {
 		dialog.setHeaderText("Adicione a quantidade:");
 
 		// Campo com a quantidade
-		TextField tfQuantidade = new TextField();
+		TextField tfQuantidade = new TextField("1");
 
 		// Invoca foco no campo de texto
 		Platform.runLater(new Runnable() {
@@ -223,6 +222,8 @@ public class InterfaceVender extends Pagina {
 				erros.add("Quantidade vazia");
 			if(!ValidaFormulario.inteiro(tfQuantidade))
 				erros.add("O valor inserido não é um número inteiro");
+			if(Conversor.StringParaInt(tfQuantidade.getText()) == 0)
+				erros.add("O valor inserido deve ser diferente de 0.");
 			if(erros.size() > 0) {
 				Alerta.listaErros(erros);
 				event.consume();
@@ -314,15 +315,23 @@ public class InterfaceVender extends Pagina {
 		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
 		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar, btnCancelar);
-		
-		Button getBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
-		getBtnFinalizar.addEventFilter(ActionEvent.ACTION, event -> {
-			
-		});
 
 		Optional<ButtonType> resultado = dialog.showAndWait();
 		if(resultado.get() == btnFinalizar) {
-
+			String mp = tgMeioPagamento.getSelectedToggle().getUserData().toString();
+			operadorVenda.finalizarVenda(venda, mp);
+			novaVenda();
 		}
+	}
+
+	private void novaVenda() {
+		venda = new Venda();
+		Platform.runLater(new Runnable() {
+			@Override public void run() {
+				limpaBusca();
+				atualizaCaixa();
+				atualizaTotal();
+			}
+		});
 	}
 }

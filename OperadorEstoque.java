@@ -1,11 +1,11 @@
 import java.util.*;
 
-public class OperadorProduto {
+public class OperadorEstoque {
 	
 	// Lista de Produtos
 	public ArrayList<Produto> lista = new ArrayList<Produto>();
 
-	public OperadorProduto() {
+	public OperadorEstoque() {
 		lista.add(new Produto("Jornal de Lavras", 2.30, 100, "18/06/2019"));
 		lista.add(new Produto("Estadão", 2.00, 500, "12/04/2019"));
 	}
@@ -30,10 +30,6 @@ public class OperadorProduto {
 
 	public void remover(Produto produto) {
 		lista.remove(produto);
-	}
-
-	public void vender(Produto produto) {
-		
 	}
 
 }
