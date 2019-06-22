@@ -5,22 +5,25 @@ public class Venda {
 	private static int lastId = 0;
 	private int id;
 	public ArrayList<ProdutoVenda> lista;
+	private int itens;
 	private double total;
-	private boolean finalizada;
-	private Date data;
-	private MeioPagamento meioPagamento;
+	private String dataHora;
+	private String meioPagamento;
 
 	public Venda() {
-		id = 0;
-		finalizada = false;
-		data = null;
+		itens = 0;
+		dataHora = null;
 		lista = new ArrayList<ProdutoVenda>();
 	}
 
-	public void finalizar() {
+	public void finalizar(String meioPagamento) {
+		this.meioPagamento = meioPagamento;
 		id = ++lastId;
-		finalizada = true;
-		data = new Date();
+		itens = 0;
+		for(ProdutoVenda pv: lista) {
+			itens += pv.getQuantidade();
+		}
+		dataHora = Conversor.DataHoraParaString(new Date());
 	}
 
 	public void inserirProduto(ProdutoVenda produto) {
@@ -56,21 +59,41 @@ public class Venda {
 		}
 	}
 
-	public double getTotal() {
-		return total;
-	}
-
 	public boolean vazia() {
 		if(lista.size() == 0) return true;
 		return false;
 	}
 
-	public void setMeioPagamento(MeioPagamento meioPagamento) {
+	public int getId() {
+		return id;
+	}
+
+	public int getItens() {
+		return itens;
+	}
+
+	public String getMeioPagamento() {
+		return meioPagamento;
+	}
+
+	public void setMeioPagamento(String meioPagamento) {
 		this.meioPagamento = meioPagamento;
 	}
 
-	public MeioPagamento getMeioPagamento() {
-		return meioPagamento;
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public String getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(String dataHora) {
+		this.dataHora = dataHora;
 	}
 
 }

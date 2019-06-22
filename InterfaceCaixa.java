@@ -13,16 +13,18 @@ import javafx.scene.text.*;
 import javafx.scene.layout.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 
 public class InterfaceCaixa extends Pagina {
 
 	public static final String titulo = "Caixa";
 	public static final Image icone = new Image("img/menu-caixa.png");
 
+	private ArrayList<String> meiosPagamento;
+
 	private OperadorEstoque operadorEstoque;
-	private OperadorVenda operadorVenda;
+	private OperadorVendas operadorVendas;
 
 	private TableView<Produto> tblListaProdutos;
 	private TableView<ProdutoVenda> tblCaixa;
@@ -31,16 +33,22 @@ public class InterfaceCaixa extends Pagina {
 	private TextField tfBusca;
 	private Text tTotal;
 
-	public InterfaceCaixa(Layout layout, OperadorVenda operadorVenda, OperadorEstoque operadorEstoque) {
+	public InterfaceCaixa(Layout layout, OperadorVendas operadorVendas, OperadorEstoque operadorEstoque) {
 		super(layout);
 		super.alteraTitulo(titulo);
 		super.selecionaBotao(layout.btnCaixa);
 
 		this.operadorEstoque = operadorEstoque;
-		this.operadorVenda = operadorVenda;
+		this.operadorVendas = operadorVendas;
 
 		// Instanciar nova venda
 		novaVenda();
+
+		// Lista de meios de pagamento disponíveis
+		meiosPagamento = new ArrayList<String>();
+		meiosPagamento.add("Cartão de Crédito");
+		meiosPagamento.add("Dinheiro");
+		meiosPagamento.add("Cheque");
 
 		// Lado esquerdo
 
@@ -298,16 +306,14 @@ public class InterfaceCaixa extends Pagina {
 		ToggleGroup tgMeioPagamento = new ToggleGroup();
 
 		int numMeiosPagamento = 0;
-		for(MeioPagamento mp: operadorVenda.meiosPagamento) {
-			RadioButton rb = new RadioButton(mp.getNome());
-			rb.setUserData(mp.getNome());
+		for(String mp: meiosPagamento) {
+			RadioButton rb = new RadioButton(mp);
+			rb.setUserData(mp);
 			rb.setToggleGroup(tgMeioPagamento);
 			conteudo.getChildren().add(rb);
 			if(numMeiosPagamento == 0) rb.setSelected(true);
 			numMeiosPagamento++;
 		}
-
-		// tgMeioPagamento.getSelectedToggle().getUserData().toString()
 
 		dialog.getDialogPane().setContent(conteudo);
 
@@ -319,7 +325,7 @@ public class InterfaceCaixa extends Pagina {
 		Optional<ButtonType> resultado = dialog.showAndWait();
 		if(resultado.get() == btnFinalizar) {
 			String mp = tgMeioPagamento.getSelectedToggle().getUserData().toString();
-			operadorVenda.finalizarVenda(venda, mp);
+			operadorVendas.finalizarVenda(venda, mp);
 			novaVenda();
 		}
 	}
