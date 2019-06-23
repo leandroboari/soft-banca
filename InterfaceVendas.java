@@ -19,6 +19,8 @@ public class InterfaceVendas extends Pagina {
 	private OperadorVendas operadorVendas;
 	private TableView<Venda> tabela;
 
+	private Text tTotal;
+
 	public InterfaceVendas(Layout layout, OperadorVendas operadorVendas) {
 		super(layout);
 		super.alteraTitulo(titulo);
@@ -33,14 +35,15 @@ public class InterfaceVendas extends Pagina {
 		barraAcoes.getStyleClass().add("barraOpcoes");
 
 		// Botões
-		ChoiceBox cbIntervalo = new ChoiceBox(FXCollections.observableArrayList("Hoje", "Semana", "Mês"));
+		ChoiceBox<String> cbIntervalo = new ChoiceBox<String>(FXCollections.observableArrayList("Hoje", "Semana", "Mês"));
 		cbIntervalo.getSelectionModel().selectFirst();
 		Button btnDetalhes = new Button("Ver Detalhes");
 		barraAcoes.getChildren().addAll(cbIntervalo, btnDetalhes);
 
-		// Busca
-		Text tTotal = new Text("R$ 0,00");
+		// Total
+		tTotal = new Text();
 		tTotal.getStyleClass().add("total");
+		atualizaTotal();
 
 		BorderPane barraOpcoes = new BorderPane();
 		barraOpcoes.setLeft(barraAcoes);
@@ -58,8 +61,8 @@ public class InterfaceVendas extends Pagina {
 		colunaItens.setCellValueFactory(new PropertyValueFactory<Venda, Integer>("itens"));
 		tabela.getColumns().add(colunaItens);
 
-		TableColumn<Venda, Double> colunaTotal = new TableColumn<Venda, Double>("Total");
-		colunaTotal.setCellValueFactory(new PropertyValueFactory<Venda, Double>("total"));
+		TableColumn<Venda, String> colunaTotal = new TableColumn<Venda, String>("Total");
+		colunaTotal.setCellValueFactory(new PropertyValueFactory<Venda, String>("totalArredondado"));
 		tabela.getColumns().add(colunaTotal);
 
 		TableColumn<Venda, String> colunaData = new TableColumn<Venda, String>("Data e Hora");
@@ -74,7 +77,7 @@ public class InterfaceVendas extends Pagina {
 		tabela.prefHeightProperty().bind(layout.conteudo.heightProperty());
 		tabela.prefWidthProperty().bind(layout.conteudo.widthProperty());
 
-		atualizarTabela();
+		operadorVendas.preencherTabela(tabela);
 
 		// Caso não tenham produtos inseridos
 		tabela.setPlaceholder(new Label("Não foram encontradas vendas."));
@@ -83,14 +86,69 @@ public class InterfaceVendas extends Pagina {
 		conteudoVendas.setTop(barraOpcoes);
 		conteudoVendas.setCenter(tabela);
 
+		// Botão Finalizar Venda
+		btnDetalhes.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				Venda vendaSelecionada = tabela.getSelectionModel().getSelectedItem();
+				if(vendaSelecionada == null) {
+					Alerta.erro("Por favor, é necessário selecionar uma venda.");
+				} else {
+					verDetalhes(vendaSelecionada);
+				}
+			}
+		});
+
 		super.layout.conteudo.getChildren().add(conteudoVendas);
 	}
 
-	private void atualizarTabela() {
-		tabela.getItems().clear();
-		for (Venda venda: operadorVendas.lista) {
-			tabela.getItems().add(venda);
+	private void verDetalhes(Venda venda) {
+		Dialog<ButtonType> dialog = new Dialog<>();
+		dialog.setTitle("Detalhes da Venda");
+		dialog.setHeaderText("Verifique as informações a seguir:");
+		
+		// Botões
+		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar);
+		
+		VBox bDetalhes = new VBox();
+
+		bDetalhes.getChildren().add(new Text("ID da venda: "+String.valueOf(venda.getId())));
+		bDetalhes.getChildren().add(new Text("Qtd. de itens: "+String.valueOf(venda.getItens())));
+
+		Pane espaco = new Pane();
+		espaco.setPrefSize(10,10);
+		bDetalhes.getChildren().add(espaco);
+
+		int contaProdutos = 1;
+		for(ProdutoVenda pv: venda.getLista()) {
+
+			String nome = pv.getTitulo();
+			bDetalhes.getChildren().add(new Text("Produto "+String.valueOf(contaProdutos)+": "+nome));
+
+			int qtde = pv.getQuantidade();
+			double preco = pv.getPreco();
+			String valores = String.valueOf(qtde)+" x "+Conversor.DoubleParaPreco(preco, true)+" = "+Conversor.DoubleParaPreco(qtde * preco, true);
+			bDetalhes.getChildren().add(new Text(valores));
+
+			Pane espaco2 = new Pane();
+			espaco2.setPrefSize(10,10);
+			bDetalhes.getChildren().add(espaco2);
+
+			contaProdutos++;
 		}
+
+		bDetalhes.getChildren().add(new Text("Total: "+Conversor.DoubleParaPreco(venda.getTotal(), true)));
+		bDetalhes.getChildren().add(new Text("Meio de Pagamento: "+venda.getMeioPagamento()));
+
+		dialog.getDialogPane().setContent(bDetalhes);
+		Button verBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
+		
+		Optional<ButtonType> resultado = dialog.showAndWait();
+	}
+
+	private void atualizaTotal() {
+		operadorVendas.atualizaTotal();
+		tTotal.setText(operadorVendas.getTotalArredondado());
 	}
 
 }

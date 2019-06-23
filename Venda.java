@@ -4,9 +4,10 @@ public class Venda {
 
 	private static int lastId = 0;
 	private int id;
-	public ArrayList<ProdutoVenda> lista;
+	private ArrayList<ProdutoVenda> lista;
 	private int itens;
 	private double total;
+	private String totalArredondado;
 	private String dataHora;
 	private String meioPagamento;
 
@@ -57,6 +58,7 @@ public class Venda {
 		for(ProdutoVenda produto: lista) {
 			total += produto.getQuantidade() * produto.getPreco();
 		}
+		totalArredondado = Conversor.DoubleParaPreco(total, false);
 	}
 
 	public boolean vazia() {
@@ -88,12 +90,24 @@ public class Venda {
 		this.total = total;
 	}
 
+	public String getTotalArredondado() {
+		return totalArredondado;
+	}
+
+	public void setTotalArredondado(String total) {
+		this.totalArredondado = total;
+	}
+
 	public String getDataHora() {
 		return dataHora;
 	}
 
 	public void setDataHora(String dataHora) {
 		this.dataHora = dataHora;
+	}
+
+	public ArrayList<ProdutoVenda> getLista() {
+		return lista;
 	}
 
 }

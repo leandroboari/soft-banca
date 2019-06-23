@@ -107,7 +107,7 @@ public class Conversor {
 	* @author Leandro Boari Naves Silva
 	*/
 
-	public static String DoubleParaPreco(Double valor) {
+	public static String DoubleParaPreco(Double valor, boolean comCifrao) {
 		Locale locale  = new Locale("pt", "BR");
 		DecimalFormatSymbols simbolos = new DecimalFormatSymbols(locale);
 		simbolos.setDecimalSeparator(',');
@@ -119,8 +119,9 @@ public class Conversor {
 		try {
 			// Aredondamento sempre para cima
 			formataPreco.setRoundingMode(RoundingMode.UP);
-
-			return "R$ " + formataPreco.format(valor);
+			String cifrao = "";
+			if(comCifrao) cifrao = "R$ ";
+			return cifrao + formataPreco.format(valor);
 
 		} catch (NumberFormatException nfe) {
 			Alerta.erro("A conversão de decimal para um valor em dinheiro falhou.");

@@ -7,6 +7,7 @@ public class Produto {
 	protected int qtdEstoque;
 	protected int qtdVendas;
 	protected double preco;
+	protected String precoArredondado;
 	protected String dataEntrada;
 
 	public Produto(int id, String titulo, double preco, int qtdEstoque, String dataEntrada) {
@@ -14,8 +15,9 @@ public class Produto {
 		this.titulo = titulo;
 		this.preco = preco;
 		this.qtdEstoque = qtdEstoque;
-		qtdVendas = 0;
 		this.dataEntrada = dataEntrada;
+		qtdVendas = 0;
+		precoArredondado = Conversor.DoubleParaPreco(preco, false);
 	}
 
 	public Produto(String titulo, double preco, int qtdEstoque, String dataEntrada) {
@@ -23,8 +25,9 @@ public class Produto {
 		this.titulo = titulo;
 		this.preco = preco;
 		this.qtdEstoque = qtdEstoque;
-		qtdVendas = 0;
 		this.dataEntrada = dataEntrada;
+		qtdVendas = 0;
+		precoArredondado = Conversor.DoubleParaPreco(preco, false);
 	}
 
 	public int getId() {
@@ -60,6 +63,14 @@ public class Produto {
 	}
 	public void setPreco(double preco) {
 		this.preco = preco;
+		precoArredondado = Conversor.DoubleParaPreco(this.preco, false);
+	}
+
+	public String getPrecoArredondado() {
+		return precoArredondado;
+	}
+	public void setPrecoArredondado(String precoArredondado) {
+		this.precoArredondado = precoArredondado;
 	}
 
 	public String getDataEntrada() {

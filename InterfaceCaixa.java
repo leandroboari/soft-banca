@@ -91,8 +91,8 @@ public class InterfaceCaixa extends Pagina {
 		tblListaProdutos.getColumns().add(colunaTitulo1);
 
 		// Coluna Preço
-		TableColumn<Produto, Double> colunaPreco1 = new TableColumn<Produto, Double>("Preço");
-		colunaPreco1.setCellValueFactory(new PropertyValueFactory<Produto, Double>("preco"));
+		TableColumn<Produto, String> colunaPreco1 = new TableColumn<Produto, String>("Preço");
+		colunaPreco1.setCellValueFactory(new PropertyValueFactory<Produto, String>("precoArredondado"));
 		colunaPreco1.setPrefWidth(50);
 		tblListaProdutos.getColumns().add(colunaPreco1);
 
@@ -148,8 +148,8 @@ public class InterfaceCaixa extends Pagina {
 		tblCaixa.getColumns().add(colunaTitulo2);
 
 		// Coluna Preço
-		TableColumn<ProdutoVenda, Double> colunaPreco2 = new TableColumn<ProdutoVenda, Double>("Preço");
-		colunaPreco2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, Double>("preco"));
+		TableColumn<ProdutoVenda, String> colunaPreco2 = new TableColumn<ProdutoVenda, String>("Preço");
+		colunaPreco2.setCellValueFactory(new PropertyValueFactory<ProdutoVenda, String>("precoArredondado"));
 		colunaId2.setPrefWidth(45);
 		tblCaixa.getColumns().add(colunaPreco2);
 
@@ -265,7 +265,7 @@ public class InterfaceCaixa extends Pagina {
 
 	private void atualizaCaixa() {
 		tblCaixa.getItems().clear();
-		for (ProdutoVenda produto: venda.lista) {
+		for (ProdutoVenda produto: venda.getLista()) {
 			tblCaixa.getItems().add(produto);
 		}
 	}
@@ -274,7 +274,7 @@ public class InterfaceCaixa extends Pagina {
 
 		// Verifica se já existe em caixa o produto
 		ProdutoVenda produtoEmCaixa = null;
-		for (ProdutoVenda produtoVenda: venda.lista) {
+		for (ProdutoVenda produtoVenda: venda.getLista()) {
 			if(produtoVenda.getId() == produto.getId()) 
 				produtoEmCaixa = produtoVenda;
 		}
@@ -292,7 +292,7 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	private void atualizaTotal() {
-		tTotal.setText(Conversor.DoubleParaPreco(venda.getTotal()));
+		tTotal.setText(Conversor.DoubleParaPreco(venda.getTotal(), true));
 	}
 
 	private void solicitaPagamento() {
