@@ -1,8 +1,10 @@
 import java.util.*;
+import java.io.Serializable;
 
-public class Venda {
+public class Venda implements Serializable {
 
-	private static int lastId = 0;
+	private static final long serialVersionUID = 19L;
+	transient private static int lastId = 0;
 	private int id;
 	private ArrayList<ProdutoVenda> lista;
 	private int itens;
@@ -15,6 +17,10 @@ public class Venda {
 		itens = 0;
 		dataHora = null;
 		lista = new ArrayList<ProdutoVenda>();
+	}
+
+	public Venda(int lastId) {
+		this.lastId = lastId;
 	}
 
 	public void finalizar(String meioPagamento) {
@@ -103,6 +109,15 @@ public class Venda {
 
 	public ArrayList<ProdutoVenda> getLista() {
 		return lista;
+	}
+
+	public static int getLastId() {
+		return lastId;
+	}
+
+	@Override
+	public String toString() {
+		return "Venda [id="+id+", lista="+lista+", itens="+itens+", total="+total+", totalArredondado="+totalArredondado+", dataHora="+dataHora+", meioPagamento="+meioPagamento+"]";
 	}
 
 }

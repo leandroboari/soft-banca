@@ -1,13 +1,107 @@
 import java.util.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.ClassNotFoundException;
 
 public class OperadorEstoque {
-	
+
+	transient private final String arquivoOperador = "OperadorEstoque.bin";
+	transient private final String arquivoLista = "Estoque.bin";
+
 	// Lista de Produtos
-	public ArrayList<Produto> lista = new ArrayList<Produto>();
+	transient public ArrayList<Produto> lista;
+	private int lastId;
+
+	Produto produto;
 
 	public OperadorEstoque() {
-		lista.add(new Produto("Jornal de Lavras", 2.30, 100, "18/06/2019"));
-		lista.add(new Produto("Estadão", 2.00, 500, "12/04/2019"));
+		lista = new ArrayList<Produto>();
+		lastId = 0;
+		resgataOperadorArmazenamento();
+		produto = new Produto(lastId);
+		resgataListaArmazenamento();
+	}
+
+	public void salvar() {
+		salvaListaArmazenamento();
+		salvaOperadorArmazenamento();
+	}
+
+	public void salvaListaArmazenamento() {
+		try {
+			FileOutputStream fout = new FileOutputStream(arquivoLista);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(lista);
+			oos.flush();
+			oos.close();
+		}
+		catch (FileNotFoundException fnfex) {
+			return;
+		}
+		catch (IOException ioex) {
+			return;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void resgataListaArmazenamento() {
+		try {
+			FileInputStream fin = new FileInputStream(arquivoLista);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			lista = (ArrayList<Produto>)ois.readObject();
+		}
+		catch (FileNotFoundException fnfex) {
+			return;
+		}
+		catch (IOException ioex) {
+			return;
+		} 
+		catch (ClassNotFoundException ccex) {
+			return;
+		}
+
+		for(Produto produto: lista){
+			System.out.println(produto);
+		}
+	}
+
+	public void salvaOperadorArmazenamento() {
+		lastId = produto.getLastId();
+		try {
+			FileOutputStream fout = new FileOutputStream(arquivoOperador);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(lastId);
+			oos.flush();
+			oos.close();
+		}
+		catch (FileNotFoundException fnfex) {
+			return;
+		}
+		catch (IOException ioex) {
+			return;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void resgataOperadorArmazenamento() {
+		try {
+			FileInputStream fin = new FileInputStream(arquivoOperador);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			lastId = (Integer)ois.readObject();
+		}
+		catch (FileNotFoundException fnfex) {
+			return;
+		}
+		catch (IOException ioex) {
+			return;
+		} 
+		catch (ClassNotFoundException ccex) {
+			return;
+		}
 	}
 
 	public void adicionar(Produto produto) {

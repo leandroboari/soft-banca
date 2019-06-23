@@ -1,7 +1,10 @@
 import java.util.*;
+import java.io.Serializable;
 
-public class Produto {
-	private static int lastId = 0;
+public class Produto implements Serializable {
+
+	private static final long serialVersionUID = 19L;
+	transient private static int lastId = 0;
 	protected int id;
 	protected String titulo;
 	protected int qtdEstoque;
@@ -25,6 +28,10 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 		this.dataEntrada = dataEntrada;
 		precoArredondado = Conversor.DoubleParaPreco(preco, false);
+	}
+
+	public Produto(int lastId) {
+		this.lastId = lastId;
 	}
 
 	public int getId() {
@@ -76,6 +83,15 @@ public class Produto {
 
 	public void retirarEstoque(int quantidade) {
 		qtdEstoque -= quantidade;
+	}
+
+	public static int getLastId() {
+		return lastId;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id="+id+", titulo="+titulo+", qtdEstoque="+qtdEstoque+", preco="+preco+", precoArredondado="+precoArredondado+", dataEntrada="+dataEntrada+"]";
 	}
 
 }

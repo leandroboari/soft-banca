@@ -2,6 +2,8 @@ import javafx.application.Application;
 import javafx.event.*;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Principal extends Application {
 
@@ -15,6 +17,7 @@ public class Principal extends Application {
 	// Classe para operar o estoque
 	private OperadorEstoque operadorEstoque;
 
+	// Classe principal
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -51,5 +54,11 @@ public class Principal extends Application {
 			pagina = new InterfaceVendas(layout, operadorVendas);
 		});
 
+	}
+
+	@Override
+	public void stop(){
+		operadorVendas.salvar();
+		operadorEstoque.salvar();
 	}
 }
