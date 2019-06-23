@@ -27,8 +27,9 @@ public class Venda {
 		dataHora = Conversor.DataHoraParaString(new Date());
 	}
 
-	public void inserirProduto(ProdutoVenda produto) {
-		lista.add(produto);
+	public void inserirQuantidade(Produto produto, int quantidade) {
+		int posicao = lista.indexOf(produto);
+		lista.get(posicao).inserirQuantidade(quantidade);
 		atualizaTotal();
 	}
 
@@ -47,13 +48,7 @@ public class Venda {
 		lista.remove(produto);
 	}
 
-	public void inserirQuantidade(Produto produto, int quantidade) {
-		int posicao = lista.indexOf(produto);
-		lista.get(posicao).inserirQuantidade(quantidade);
-		atualizaTotal();
-	}
-
-	private void atualizaTotal() {
+	public void atualizaTotal() {
 		total = 0;
 		for(ProdutoVenda produto: lista) {
 			total += produto.getQuantidade() * produto.getPreco();

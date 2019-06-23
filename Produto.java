@@ -5,7 +5,6 @@ public class Produto {
 	protected int id;
 	protected String titulo;
 	protected int qtdEstoque;
-	protected int qtdVendas;
 	protected double preco;
 	protected String precoArredondado;
 	protected String dataEntrada;
@@ -16,7 +15,6 @@ public class Produto {
 		this.preco = preco;
 		this.qtdEstoque = qtdEstoque;
 		this.dataEntrada = dataEntrada;
-		qtdVendas = 0;
 		precoArredondado = Conversor.DoubleParaPreco(preco, false);
 	}
 
@@ -26,7 +24,6 @@ public class Produto {
 		this.preco = preco;
 		this.qtdEstoque = qtdEstoque;
 		this.dataEntrada = dataEntrada;
-		qtdVendas = 0;
 		precoArredondado = Conversor.DoubleParaPreco(preco, false);
 	}
 
@@ -51,13 +48,6 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	public int getQtdVendas() {
-		return qtdVendas;
-	}
-	public void setQtdVendas(int qtdVendas) {
-		this.qtdVendas = qtdVendas;
-	}
-
 	public double getPreco() {
 		return preco;
 	}
@@ -80,17 +70,12 @@ public class Produto {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public int qtdDisponivel() {
-		int qtdDisponivel = 0;
-		int qtd = qtdEstoque - qtdVendas;
-		if(qtd > 0) {
-			qtdDisponivel = qtd;
-		}
-		return qtdDisponivel;
-	}
-
 	public void inserirEstoque(int quantidade) {
 		qtdEstoque += quantidade;
+	}
+
+	public void retirarEstoque(int quantidade) {
+		qtdEstoque -= quantidade;
 	}
 
 }

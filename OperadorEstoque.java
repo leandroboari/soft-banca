@@ -32,4 +32,16 @@ public class OperadorEstoque {
 		lista.remove(produto);
 	}
 
+	public void novaVenda(Venda venda) {
+		for(ProdutoVenda produtoVenda: venda.getLista()) {
+			int id = produtoVenda.getId();
+			for(Produto produto: lista) {
+				if(produto.getId() == produtoVenda.getId()) {
+					int quantidade = produtoVenda.getQuantidade();
+					produto.retirarEstoque(quantidade);
+				}
+			}
+		}
+	}
+
 }

@@ -18,7 +18,6 @@ public class InterfaceVendas extends Pagina {
 
 	private OperadorVendas operadorVendas;
 	private TableView<Venda> tabela;
-
 	private Text tTotal;
 
 	public InterfaceVendas(Layout layout, OperadorVendas operadorVendas) {

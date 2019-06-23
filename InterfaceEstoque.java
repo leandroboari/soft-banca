@@ -71,10 +71,6 @@ public class InterfaceEstoque extends Pagina {
 		colunaEstoque.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("qtdEstoque"));
 		tabela.getColumns().add(colunaEstoque);
 
-		TableColumn<Produto, Integer> colunaVendas = new TableColumn<Produto, Integer>("Vendas");
-		colunaVendas.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("qtdVendas"));
-		tabela.getColumns().add(colunaVendas);
-
 		TableColumn<Produto, String> colunaEntrada = new TableColumn<Produto, String>("Entrada");
 		colunaEntrada.setCellValueFactory(new PropertyValueFactory<Produto, String>("dataEntrada"));
 		tabela.getColumns().add(colunaEntrada);

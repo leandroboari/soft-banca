@@ -163,7 +163,7 @@ public class InterfaceCaixa extends Pagina {
 		tblCaixa.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
 				ProdutoVenda produtoSelecionado = tblCaixa.getSelectionModel().getSelectedItem();
-				
+				solicitaRemocao(produtoSelecionado);
 			}
 		});
 
@@ -222,14 +222,14 @@ public class InterfaceCaixa extends Pagina {
 		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
 		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().addAll(btnFinalizar, btnCancelar);
-		
+
 		Button getBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
 		getBtnFinalizar.addEventFilter(ActionEvent.ACTION, event -> {
 			ArrayList<String> erros = new ArrayList<String>();
 			if(ValidaFormulario.nulo(tfQuantidade))
-				erros.add("Quantidade vazia");
+				erros.add("Quantidade vazia.");
 			if(!ValidaFormulario.inteiro(tfQuantidade))
-				erros.add("O valor inserido não é um número inteiro");
+				erros.add("O valor inserido não é um número inteiro.");
 			if(Conversor.StringParaInt(tfQuantidade.getText()) == 0)
 				erros.add("O valor inserido deve ser diferente de 0.");
 			if(erros.size() > 0) {
@@ -278,15 +278,25 @@ public class InterfaceCaixa extends Pagina {
 			if(produtoVenda.getId() == produto.getId()) 
 				produtoEmCaixa = produtoVenda;
 		}
+
+		String erroQtdEstoque = "A quantidade solicitada não há em estoque.";
 		
 		// Caso tenha em caixa, adiciona quantidade
-		if(produtoEmCaixa != null)
-			venda.inserirQuantidade(produtoEmCaixa, quantidade);
-
+		if(produtoEmCaixa != null) {
+			int qtdEstoque = produtoEmCaixa.getQtdEstoque();
+			int qtdSolicitada = produtoEmCaixa.getQuantidade() + quantidade;
+			if(qtdEstoque >= qtdSolicitada)
+				venda.inserirQuantidade(produtoEmCaixa, quantidade);
+			else Alerta.erro("A quantidade solicitada ("+String.valueOf(qtdSolicitada)+") não há em\nestoque ("+String.valueOf(qtdEstoque)+").");
+		}
 		// caso não tenha, o Produto será adicionado em Venda como ProdutoVenda
-		else
-			venda.inserirProduto(produto, quantidade);
-
+		else {
+			int qtdEstoque = produto.getQtdEstoque();
+			int qtdSolicitada = quantidade;
+			if(qtdEstoque >= qtdSolicitada)
+				venda.inserirProduto(produto, quantidade);
+			else Alerta.erro("A quantidade solicitada ("+String.valueOf(qtdSolicitada)+") não há em\nestoque ("+String.valueOf(qtdEstoque)+").");
+		}
 		// Atualiza Texto com o Total da Venda
 		atualizaTotal();
 	}
@@ -326,6 +336,7 @@ public class InterfaceCaixa extends Pagina {
 		if(resultado.get() == btnFinalizar) {
 			String mp = tgMeioPagamento.getSelectedToggle().getUserData().toString();
 			operadorVendas.finalizarVenda(venda, mp);
+			operadorEstoque.novaVenda(venda);
 			novaVenda();
 		}
 	}
@@ -340,4 +351,75 @@ public class InterfaceCaixa extends Pagina {
 			}
 		});
 	}
+
+	private void solicitaRemocao(ProdutoVenda produto) {
+		Dialog<ButtonType> dialog = new Dialog<>();
+		dialog.setTitle("Remoção");
+		dialog.setHeaderText("Remover quantos itens?");
+
+		// Campo com a quantidade
+		TextField tfQuantidade = new TextField("1");
+
+		// Invoca foco no campo de texto
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				tfQuantidade.requestFocus();
+			}
+		});
+
+		// Caixa de conteúdo
+		HBox conteudo = new HBox();
+		conteudo.setPadding(new Insets(10));
+		conteudo.getChildren().add(tfQuantidade);
+		dialog.getDialogPane().setContent(conteudo);
+
+		// Botões
+		ButtonType btnTodos = new ButtonType("Todos", ButtonData.NO);
+		ButtonType btnCancelar = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
+		ButtonType btnFinalizar = new ButtonType("Finalizar", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(btnTodos, btnCancelar, btnFinalizar);
+
+		Button getBtnFinalizar = (Button) dialog.getDialogPane().lookupButton(btnFinalizar);
+		getBtnFinalizar.addEventFilter(ActionEvent.ACTION, event -> {
+			ArrayList<String> erros = new ArrayList<String>();
+			if(ValidaFormulario.nulo(tfQuantidade))
+				erros.add("Quantidade vazia.");
+			if(!ValidaFormulario.inteiro(tfQuantidade))
+				erros.add("O valor inserido não é um número inteiro.");
+			if(Conversor.StringParaInt(tfQuantidade.getText()) == 0)
+				erros.add("O valor inserido deve ser diferente de 0.");
+			if(erros.size() > 0) {
+				Alerta.listaErros(erros);
+				event.consume();
+			}
+		});
+
+		Optional<ButtonType> resultado = dialog.showAndWait();
+		if(resultado.get() == btnFinalizar) {
+			// Quantidade de itens para o caixa
+			int quantidade = Conversor.StringParaInt(tfQuantidade.getText());
+			removeCaixa(produto, quantidade);
+		}
+		if(resultado.get() == btnTodos) {
+			removeCaixa(produto, produto.getQuantidade());
+		}
+
+		// Necessário para executar mudanças na interface após encerrar diálogo
+		Platform.runLater(new Runnable() {
+			@Override public void run() {
+				atualizaCaixa();
+				atualizaTotal();
+			}
+		});
+	}
+
+	private void removeCaixa(ProdutoVenda produto, int quantidade) {
+		produto.removerQuantidade(quantidade);
+		if(produto.getQuantidade() == 0) {
+			venda.removeProduto(produto);
+		}
+		venda.atualizaTotal();
+	}
+
 }

@@ -19,4 +19,9 @@ public class ProdutoVenda extends Produto {
 		this.quantidade += quantidade;
 	}
 
+	public void removerQuantidade(int quantidade) {
+		this.quantidade -= quantidade;
+		if(quantidade < 0) quantidade = 0;
+	}
+
 }
