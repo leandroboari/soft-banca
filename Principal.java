@@ -17,10 +17,24 @@ public class Principal extends Application {
 	// Classe para operar o estoque
 	private OperadorEstoque operadorEstoque;
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	// Classe principal
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@Override
 	public void start(Stage stage) {
@@ -55,6 +69,13 @@ public class Principal extends Application {
 		});
 
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@Override
 	public void stop(){

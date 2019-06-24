@@ -9,29 +9,49 @@ import java.lang.ClassNotFoundException;
 
 public class OperadorEstoque {
 
-	transient private final String arquivoOperador = "OperadorEstoque.bin";
-	transient private final String arquivoLista = "Estoque.bin";
+	// Arquivos de bancos de dados
+	transient private final String arquivoOperador = "db/OperadorEstoque.bin";
+	transient private final String arquivoLista = "db/Estoque.bin";
 
 	// Lista de Produtos
 	transient public ArrayList<Produto> lista;
 	private int lastId;
 
-	Produto produto;
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public OperadorEstoque() {
 		lista = new ArrayList<Produto>();
 		lastId = 0;
 		resgataOperadorArmazenamento();
-		produto = new Produto(lastId);
+		new Produto(lastId);
 		resgataListaArmazenamento();
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public void salvar() {
-		salvaListaArmazenamento();
-		salvaOperadorArmazenamento();
+		salvarListaArmazenamento();
+		salvarOperadorArmazenamento();
 	}
 
-	public void salvaListaArmazenamento() {
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	public void salvarListaArmazenamento() {
 		try {
 			FileOutputStream fout = new FileOutputStream(arquivoLista);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -46,6 +66,13 @@ public class OperadorEstoque {
 			return;
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@SuppressWarnings("unchecked")
 	private void resgataListaArmazenamento() {
@@ -69,8 +96,15 @@ public class OperadorEstoque {
 		}
 	}
 
-	public void salvaOperadorArmazenamento() {
-		lastId = produto.getLastId();
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	public void salvarOperadorArmazenamento() {
+		lastId = Produto.getLastId();
 		try {
 			FileOutputStream fout = new FileOutputStream(arquivoOperador);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -85,6 +119,13 @@ public class OperadorEstoque {
 			return;
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@SuppressWarnings("unchecked")
 	private void resgataOperadorArmazenamento() {
@@ -104,9 +145,23 @@ public class OperadorEstoque {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public void adicionar(Produto produto) {
 		lista.add(produto);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public void editar(Produto produto, String titulo, double preco, int estoque, String dataEntrada) {
 		int posicao = lista.indexOf(produto);
@@ -122,9 +177,23 @@ public class OperadorEstoque {
 		lista.get(posicao).setDataEntrada(dataEntrada);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public void remover(Produto produto) {
 		lista.remove(produto);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public void novaVenda(Venda venda) {
 		for(ProdutoVenda produtoVenda: venda.getLista()) {

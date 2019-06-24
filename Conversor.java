@@ -1,15 +1,12 @@
 import java.math.RoundingMode;
-
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.DateTimeException;
-
 import java.util.Locale;
 
 public class Conversor {

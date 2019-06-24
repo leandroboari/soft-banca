@@ -10,32 +10,54 @@ import java.lang.ClassNotFoundException;
 
 public class OperadorVendas {
 
-	transient private final String arquivoOperador = "OperadorVendas.bin";
-	transient private final String arquivoLista = "Vendas.bin";
+	// Arquivos de bancos de dados
+	transient private final String arquivoOperador = "db/OperadorVendas.bin";
+	transient private final String arquivoLista = "db/Vendas.bin";
 
+	// Total de vendas
 	transient private double total;
 	transient private String totalArredondado;
 
+	// Lista de Vendas
 	transient private ArrayList<Venda> lista;
 	private int lastId;
 
-	transient private Venda venda;
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public OperadorVendas() {
 		lista = new ArrayList<Venda>();
 		lastId = 0;
 		resgataOperadorArmazenamento();
-		venda = new Venda(lastId);
+		new Venda(lastId);
 		resgataListaArmazenamento();
 		atualizaTotal();
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public void salvar() {
-		salvaListaArmazenamento();
-		salvaOperadorArmazenamento();
+		salvarListaArmazenamento();
+		salvarOperadorArmazenamento();
 	}
 
-	public void salvaListaArmazenamento() {
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	public void salvarListaArmazenamento() {
 		try {
 			FileOutputStream fout = new FileOutputStream(arquivoLista);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -50,6 +72,13 @@ public class OperadorVendas {
 			return;
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@SuppressWarnings("unchecked")
 	private void resgataListaArmazenamento() {
@@ -73,8 +102,15 @@ public class OperadorVendas {
 		// }
 	}
 
-	public void salvaOperadorArmazenamento() {
-		lastId = venda.getLastId();
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	public void salvarOperadorArmazenamento() {
+		lastId = Venda.getLastId();
 		try {
 			FileOutputStream fout = new FileOutputStream(arquivoOperador);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -89,6 +125,13 @@ public class OperadorVendas {
 			return;
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	@SuppressWarnings("unchecked")
 	private void resgataOperadorArmazenamento() {
@@ -108,14 +151,35 @@ public class OperadorVendas {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void inserirVenda(Venda venda) {
 		lista.add(venda);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public void finalizarVenda(Venda venda, String meioPagamento) {
 		venda.finalizar(meioPagamento);
 		inserirVenda(venda);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public void preencherTabela(TableView<Venda> tabela) {
 		tabela.getItems().clear();
@@ -124,6 +188,13 @@ public class OperadorVendas {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public void atualizaTotal() {
 		total = 0;
 		for (Venda venda: lista) {
@@ -131,6 +202,13 @@ public class OperadorVendas {
 		}
 		totalArredondado = Conversor.DoubleParaPreco(total, true);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public String getTotalArredondado() {
 		return totalArredondado;

@@ -20,6 +20,13 @@ public class InterfaceVendas extends Pagina {
 	private TableView<Venda> tabela;
 	private Text tTotal;
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public InterfaceVendas(Layout layout, OperadorVendas operadorVendas) {
 		super(layout);
 		super.alteraTitulo(titulo);
@@ -100,6 +107,13 @@ public class InterfaceVendas extends Pagina {
 		super.layout.conteudo.getChildren().add(conteudoVendas);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void verDetalhes(Venda venda) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Detalhes da Venda");
@@ -144,6 +158,13 @@ public class InterfaceVendas extends Pagina {
 		
 		Optional<ButtonType> resultado = dialog.showAndWait();
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void atualizaTotal() {
 		operadorVendas.atualizaTotal();

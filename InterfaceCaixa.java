@@ -22,16 +22,20 @@ public class InterfaceCaixa extends Pagina {
 	public static final Image icone = new Image("img/menu-caixa.png");
 
 	private ArrayList<String> meiosPagamento;
-
 	private OperadorEstoque operadorEstoque;
 	private OperadorVendas operadorVendas;
-
 	private TableView<Produto> tblListaProdutos;
 	private TableView<ProdutoVenda> tblCaixa;
 	private Venda venda;
-
 	private TextField tfBusca;
 	private Text tTotal;
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public InterfaceCaixa(Layout layout, OperadorVendas operadorVendas, OperadorEstoque operadorEstoque) {
 		super(layout);
@@ -51,8 +55,6 @@ public class InterfaceCaixa extends Pagina {
 		meiosPagamento.add("Cheque");
 
 		// Lado esquerdo
-
-		// Barra de opções
 
 		// Campo de busca
 		tfBusca = new TextField();
@@ -185,6 +187,13 @@ public class InterfaceCaixa extends Pagina {
 		super.layout.conteudo.getChildren().add(splitPane);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void realizarBusca(String filtro) {
 		tblListaProdutos.getItems().clear();
 		for (Produto produto: operadorEstoque.lista) {
@@ -195,6 +204,13 @@ public class InterfaceCaixa extends Pagina {
 			}
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void solicitaQuantidade(Produto produto) {
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -258,10 +274,24 @@ public class InterfaceCaixa extends Pagina {
 		});
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void limpaBusca() {
 		tblListaProdutos.getItems().clear();
 		tfBusca.setText("");
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void atualizaCaixa() {
 		tblCaixa.getItems().clear();
@@ -269,6 +299,13 @@ public class InterfaceCaixa extends Pagina {
 			tblCaixa.getItems().add(produto);
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void insereCaixa(Produto produto, int quantidade) {
 
@@ -301,9 +338,23 @@ public class InterfaceCaixa extends Pagina {
 		atualizaTotal();
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void atualizaTotal() {
 		tTotal.setText(Conversor.DoubleParaPreco(venda.getTotal(), true));
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void solicitaPagamento() {
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -341,6 +392,13 @@ public class InterfaceCaixa extends Pagina {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void novaVenda() {
 		venda = new Venda();
 		Platform.runLater(new Runnable() {
@@ -351,6 +409,13 @@ public class InterfaceCaixa extends Pagina {
 			}
 		});
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void solicitaRemocao(ProdutoVenda produto) {
 		Dialog<ButtonType> dialog = new Dialog<>();
@@ -413,6 +478,13 @@ public class InterfaceCaixa extends Pagina {
 			}
 		});
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void removeCaixa(ProdutoVenda produto, int quantidade) {
 		produto.removerQuantidade(quantidade);

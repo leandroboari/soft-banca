@@ -17,6 +17,13 @@ public class InterfaceEstoque extends Pagina {
 	private OperadorEstoque operadorEstoque;
 	private TableView<Produto> tabela;
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public InterfaceEstoque(Layout layout, OperadorEstoque operadorEstoque) {
 		super(layout);
 		super.alteraTitulo(titulo);
@@ -144,6 +151,13 @@ public class InterfaceEstoque extends Pagina {
 		super.layout.conteudo.getChildren().add(conteudoProdutos);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void editarProduto(Produto produto) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Editar Produto");
@@ -239,6 +253,13 @@ public class InterfaceEstoque extends Pagina {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void inserirEstoque(Produto produto) {
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.setTitle("Inserir Estoque");
@@ -271,12 +292,26 @@ public class InterfaceEstoque extends Pagina {
 		}
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void atualizarTabela() {
 		tabela.getItems().clear();
 		for (Produto produto: operadorEstoque.lista) {
 			tabela.getItems().add(produto);
 		}
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void realizarBusca(String filtro) {
 		if(filtro.equals("")) {

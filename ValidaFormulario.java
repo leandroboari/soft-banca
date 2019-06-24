@@ -5,17 +5,38 @@ import javafx.scene.control.*;
 public class ValidaFormulario {
 	public static DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public static boolean nulo(TextField campo) {
 		if (campo.getText() == null || campo.getText().isEmpty())
 			return true;
 		return false;
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public static boolean nulo(DatePicker campo) {
 		if (campo.getValue() == null)
 			return true;
 		return false;
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public static boolean inteiro(TextField campo) {
 		if(!nulo(campo)) {
@@ -28,6 +49,13 @@ public class ValidaFormulario {
 		}
 		return true;
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	public static boolean decimal(TextField campo) {
 		if(!nulo(campo)) {

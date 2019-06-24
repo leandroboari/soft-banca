@@ -4,14 +4,35 @@ public class Pagina {
 	
 	protected Layout layout;
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public Pagina(Layout layout) {
 		this.layout = layout;
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	// Método para alterar título
 	protected void alteraTitulo(String titulo) {
 		layout.titulo.setText(titulo);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	// Método ao clicar nos botões
 	protected void selecionaBotao(Button btn) {
@@ -22,6 +43,13 @@ public class Pagina {
 		btn.getStyleClass().add("menuBotaoSelecionado");
 		limpaConteudo();
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	// Limpa conteúdo da página
 	protected void limpaConteudo() {

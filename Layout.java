@@ -26,6 +26,13 @@ public class Layout {
 	public Button btnEstoque;
 	public Button btnVendas;
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	public Layout(Stage stage) {
 		this.stage = stage;
 		barraLateral();
@@ -39,10 +46,24 @@ public class Layout {
 		cena();
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void barraLateral() {
 		barraLateral = new VBox();
 		barraLateral.getStyleClass().add("barraLateral");
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void logo() {
 		ImageView logo = new ImageView();
@@ -51,6 +72,13 @@ public class Layout {
 		logo.setPreserveRatio(true);
 		barraLateral.getChildren().add(logo);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void menu() {
 		menu = new VBox();
@@ -75,10 +103,24 @@ public class Layout {
 		barraLateral.getChildren().add(menu);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void cabecalho() {
 		cabecalho = new HBox();
 		cabecalho.getStyleClass().add("cabecalho");
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void titulo() {
 		titulo = new Text("Título");
@@ -86,10 +128,24 @@ public class Layout {
 		cabecalho.getChildren().add(titulo);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void conteudo() {
 		conteudo = new VBox();
 		conteudo.getStyleClass().add("conteudo");
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	private void corpo() {
 		corpo = new BorderPane();
@@ -97,11 +153,25 @@ public class Layout {
 		corpo.setCenter(conteudo);
 	}
 
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
 	private void principal() {
 		principal = new BorderPane();
 		principal.setLeft(barraLateral);
 		principal.setCenter(corpo);
 	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
 
 	// Cena do aplicativo
 	private void cena() {
