@@ -117,3 +117,9 @@
 	-fx-font-size: 15px;
 	-fx-fill: #444;
 }
+
+.login {
+	-fx-alignment: center;
+	-fx-spacing: 20;
+	-fx-background-color: #242424;
+}

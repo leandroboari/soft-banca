@@ -27,6 +27,19 @@ public class Alerta {
 	}
 
 	/**
+	* Exibe um diálogo de informação.
+	* @param texto Texto a ser exibido.
+	*/
+
+	public static void sucesso(String texto) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Sucesso!");
+		alert.setHeaderText("Operação realizada com sucesso.");
+		alert.setContentText(texto);
+		alert.showAndWait();
+	}
+
+	/**
 	* Exibe um diálogo de erro com uma lista.
 	* @param erros Lista de erros a ser exibido.
 	*/

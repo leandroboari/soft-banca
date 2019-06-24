@@ -14,8 +14,10 @@ import java.io.IOException;
 
 public class Principal extends Application {
 
-	// Classes com as estruturas iniciais	
+	// Classes com as estruturas iniciais
+	private Autenticacao autenticacao;
 	private Layout layout;
+	private Login login;
 	private Pagina pagina;
 
 	// Classe para operar as vendas
@@ -41,8 +43,12 @@ public class Principal extends Application {
 	@Override
 	public void start(Stage stage) {
 		
-		// Instancia Layout
+		autenticacao = new Autenticacao();
+
 		layout = new Layout(stage);
+
+		// Instancia Layout
+		login = new Login(stage, layout, autenticacao);
 
 		// Instancia operador de vendas
 		operadorVendas = new OperadorVendas();
@@ -71,7 +77,7 @@ public class Principal extends Application {
 		});
 
 		layout.btnConfiguracoes.setOnAction(e -> {
-			pagina = new InterfaceConfiguracoes(layout);
+			pagina = new InterfaceConfiguracoes(layout, autenticacao);
 		});
 
 	}

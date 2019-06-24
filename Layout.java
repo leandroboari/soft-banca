@@ -49,7 +49,6 @@ public class Layout {
 		conteudo();
 		corpo();
 		principal();
-		cena();
 	}
 
 	/**
@@ -163,6 +162,10 @@ public class Layout {
 		stage.setScene(cena);
 		stage.getIcons().add(new Image("file:img/icon.png"));
 		stage.show();
+	}
+
+	public void iniciar() {
+		cena();
 	}
 
 }
