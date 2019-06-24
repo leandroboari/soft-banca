@@ -5,6 +5,10 @@ import javafx.scene.control.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+* Descrição da classe.
+*/
+
 public class Principal extends Application {
 
 	// Classes com as estruturas iniciais	

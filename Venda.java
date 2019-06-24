@@ -1,6 +1,10 @@
 import java.util.*;
 import java.io.Serializable;
 
+/**
+* Descrição da classe.
+*/
+
 public class Venda implements Serializable {
 
 	private static final long serialVersionUID = 19L;
@@ -15,7 +19,6 @@ public class Venda implements Serializable {
 
 	/**
 	* Descrição do método
-	* @param
 	* @return
 	* @author Leandro Boari Naves Silva
 	*/

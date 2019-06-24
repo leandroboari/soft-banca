@@ -1,5 +1,9 @@
 import java.io.Serializable;
 
+/**
+* Descrição da classe.
+*/
+
 public class ProdutoVenda extends Produto implements Serializable {
 
 	private static final long serialVersionUID = 19L;

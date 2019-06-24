@@ -1,5 +1,9 @@
 import javafx.scene.image.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class InterfaceInicial extends Pagina {
 
 	public static final String titulo = "Inicial";

@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.DateTimeException;
 import java.util.Locale;
 
+/**
+* Descrição da classe.
+*/
+
 public class Conversor {
 
 	// Formato padrão de data

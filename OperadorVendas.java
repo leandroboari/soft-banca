@@ -7,8 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
+import java.io.Serializable;
 
-public class OperadorVendas {
+/**
+* Descrição da classe.
+*/
+
+public class OperadorVendas implements Serializable {
 
 	// Arquivos de bancos de dados
 	transient private final String arquivoOperador = "db/OperadorVendas.bin";
@@ -96,10 +101,6 @@ public class OperadorVendas {
 		catch (ClassNotFoundException ccex) {
 			return;
 		}
-
-		// for(Venda venda: lista){
-		// 	System.out.println(venda);
-		// }
 	}
 
 	/**
@@ -212,6 +213,18 @@ public class OperadorVendas {
 
 	public String getTotalArredondado() {
 		return totalArredondado;
+	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	@Override
+	public String toString() {
+		return "OperadorVendas [lastId="+lastId+"]";
 	}
 
 }

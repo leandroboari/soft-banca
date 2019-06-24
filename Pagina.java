@@ -1,5 +1,9 @@
 import javafx.scene.control.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class Pagina {
 	
 	protected Layout layout;

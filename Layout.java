@@ -5,6 +5,10 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class Layout {
 
 	// Janela

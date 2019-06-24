@@ -11,6 +11,10 @@ import java.util.*;
 import javafx.scene.control.ButtonBar.*;
 import javafx.collections.FXCollections;
 
+/**
+* Descrição da classe.
+*/
+
 public class InterfaceVendas extends Pagina {
 
 	public static final String titulo = "Vendas";

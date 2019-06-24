@@ -1,6 +1,10 @@
 import java.util.*;
 import java.io.Serializable;
 
+/**
+* Descrição da classe.
+*/
+
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 19L;

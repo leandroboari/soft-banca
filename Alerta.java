@@ -4,6 +4,10 @@ import javafx.scene.control.ButtonBar.*;
 import javafx.event.*;
 import java.util.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class Alerta {
 
 	/**

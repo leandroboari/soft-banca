@@ -2,6 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.control.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class ValidaFormulario {
 	public static DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 

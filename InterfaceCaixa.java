@@ -16,6 +16,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 
+/**
+* Descrição da classe.
+*/
+
 public class InterfaceCaixa extends Pagina {
 
 	public static final String titulo = "Caixa";

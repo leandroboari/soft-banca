@@ -6,8 +6,13 @@ import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
+import java.io.Serializable;
 
-public class OperadorEstoque {
+/**
+* Descrição da classe.
+*/
+
+public class OperadorEstoque implements Serializable {
 
 	// Arquivos de bancos de dados
 	transient private final String arquivoOperador = "db/OperadorEstoque.bin";
@@ -89,10 +94,6 @@ public class OperadorEstoque {
 		} 
 		catch (ClassNotFoundException ccex) {
 			return;
-		}
-
-		for(Produto produto: lista){
-			System.out.println(produto);
 		}
 	}
 
@@ -205,6 +206,18 @@ public class OperadorEstoque {
 				}
 			}
 		}
+	}
+
+	/**
+	* Descrição do método
+	* @param
+	* @return
+	* @author Leandro Boari Naves Silva
+	*/
+
+	@Override
+	public String toString() {
+		return "OperadorEstoque [lastId="+lastId+"]";
 	}
 
 }

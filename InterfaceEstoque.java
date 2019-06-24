@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.util.*;
 import javafx.scene.control.ButtonBar.*;
 
+/**
+* Descrição da classe.
+*/
+
 public class InterfaceEstoque extends Pagina {
 
 	public static final String titulo = "Estoque";
