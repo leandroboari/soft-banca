@@ -29,6 +29,7 @@ public class Layout {
 	public Button btnCaixa;
 	public Button btnEstoque;
 	public Button btnVendas;
+	public Button btnConfiguracoes;
 
 	/**
 	* Descrição do método
@@ -103,6 +104,10 @@ public class Layout {
 		btnVendas = new Button(InterfaceVendas.titulo, new ImageView(InterfaceVendas.icone));
 		btnVendas.getStyleClass().add("menuBotao");
 		menu.getChildren().add(btnVendas);
+
+		btnConfiguracoes = new Button(InterfaceConfiguracoes.titulo, new ImageView(InterfaceConfiguracoes.icone));
+		btnConfiguracoes.getStyleClass().add("menuBotao");
+		menu.getChildren().add(btnConfiguracoes);
 
 		barraLateral.getChildren().add(menu);
 	}

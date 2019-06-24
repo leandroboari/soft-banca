@@ -44,6 +44,7 @@ public class Pagina {
 		layout.btnCaixa.getStyleClass().remove("menuBotaoSelecionado");
 		layout.btnEstoque.getStyleClass().remove("menuBotaoSelecionado");
 		layout.btnVendas.getStyleClass().remove("menuBotaoSelecionado");
+		layout.btnConfiguracoes.getStyleClass().remove("menuBotaoSelecionado");
 		btn.getStyleClass().add("menuBotaoSelecionado");
 		limpaConteudo();
 	}

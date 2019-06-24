@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * Descrição da classe.
@@ -203,6 +204,7 @@ public class OperadorVendas implements Serializable {
 		}
 		totalArredondado = Conversor.DoubleParaPreco(total, true);
 	}
+
 
 	/**
 	* Descrição do método

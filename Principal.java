@@ -47,7 +47,7 @@ public class Principal extends Application {
 		layout = new Layout(stage);
 
 		// Carrega Página Inicial
-		pagina = new InterfaceInicial(layout);
+		pagina = new InterfaceInicial(layout, operadorVendas);
 
 		// Instancia operador de vendas
 		operadorVendas = new OperadorVendas();
@@ -57,7 +57,7 @@ public class Principal extends Application {
 
 		// Navegação
 		layout.btnInicial.setOnAction(e -> {
-			pagina = new InterfaceInicial(layout);
+			pagina = new InterfaceInicial(layout, operadorVendas);
 		});
 
 		layout.btnCaixa.setOnAction(e -> {
@@ -70,6 +70,10 @@ public class Principal extends Application {
 
 		layout.btnVendas.setOnAction(e -> {
 			pagina = new InterfaceVendas(layout, operadorVendas);
+		});
+
+		layout.btnConfiguracoes.setOnAction(e -> {
+			pagina = new InterfaceConfiguracoes(layout);
 		});
 
 	}

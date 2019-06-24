@@ -77,3 +77,43 @@
 	-fx-border-color: transparent;
 	-fx-background-color: transparent, derive(#1d1d1d,10%);
 }
+
+.vendas {
+	-fx-background-color: #fff;
+	-fx-pref-height: 130;
+	-fx-alignment: center-left;
+}
+
+.vendas-logo {
+	-fx-pref-height: 130;
+	-fx-padding: 0 30 0 30;
+	-fx-alignment: center-left;
+	-fx-spacing: 20;
+}
+
+.numerosVenda {
+	-fx-pref-height: 130;
+	-fx-alignment: center;
+	-fx-text-alignment: center;
+}
+
+.conteudoVendas {
+	-fx-alignment: center;
+}
+
+.painelVendas {
+	-fx-alignment: center;
+	-fx-spacing: 5;
+}
+
+#tituloVendas {
+	-fx-font-size: 19px;
+	-fx-stroke: black;
+	-fx-stroke-width: 1;
+	-fx-fill: #222;
+}
+
+#conteudoVendas {
+	-fx-font-size: 15px;
+	-fx-fill: #444;
+}
