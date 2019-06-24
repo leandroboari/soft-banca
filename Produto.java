@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.Serializable;
 
 /**
-* Classe que caracteriza os atributos em métodos de um Produto.
+* Classe que caracteriza os atributos e métodos de um Produto.
 * @author Leandro Boari Naves Silva
 * @author Clever Oliveira
 * @author João Paulo Uba
