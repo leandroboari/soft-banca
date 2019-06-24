@@ -1,7 +1,10 @@
 import java.io.Serializable;
 
 /**
-* Descrição da classe.
+* Classe que caracteriza os atributos em métodos de um Produto de Venda.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class ProdutoVenda extends Produto implements Serializable {
@@ -10,10 +13,13 @@ public class ProdutoVenda extends Produto implements Serializable {
 	private int quantidade;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param id ID que representa a identidade do produto.
+	* @param quantidade quantidade de itens a serem vendidos.
+	* @param titulo Título que representa o produto.
+	* @param preco Preço do produto.
+	* @param qtdEstoque Quantidade em estoque do produto.
+	* @param dataEntrada Data em que foi feito a última inserção em estoque.
 	*/
 
 	public ProdutoVenda(int id, int quantidade, String titulo, double preco, int qtdEstoque, String dataEntrada) {
@@ -22,10 +28,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor para referenciar a última ID estatitcamente.
+	* @param lastId
 	*/
 	
 	public ProdutoVenda(int lastId) {
@@ -33,10 +37,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera a quantidade de itens a serem vendidos.
+	* @param quantidade Quantidade de itens a serem vendidos.
 	*/
 
 	public void setQuantidade(int quantidade) {
@@ -44,10 +46,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa a quantidade de itens a serem vendidos.
+	* @return int
 	*/
 
 	public int getQuantidade() {
@@ -55,10 +55,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Insere a quantidade de itens a serem vendidos.
+	* @param quantidade
 	*/
 
 	public void inserirQuantidade(int quantidade) {
@@ -66,10 +64,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera a quantidade de itens a serem vendidos.
+	* @param quantidade
 	*/
 
 	public void removerQuantidade(int quantidade) {
@@ -78,10 +74,8 @@ public class ProdutoVenda extends Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Serialização da classe.
+	* @return String valores a serem descritos.
 	*/
 
 	@Override

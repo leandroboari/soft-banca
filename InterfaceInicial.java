@@ -10,26 +10,26 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 
 /**
-* Descrição da classe.
+* Classe com os elementos de interface da Página Inicial.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class InterfaceInicial extends Pagina {
 
 	public static final String titulo = "Início";
 	public static final Image icone = new Image("img/menu-inicial.png");
-
 	private OperadorVendas operadorVendas;
-
 	private Text qtdHoje;
 	private Text valHoje;
 	private Text qtdMes;
 	private Text valMes;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param layout
+	* @param operadorVendas
 	*/
 
 	public InterfaceInicial(Layout layout, OperadorVendas operadorVendas) {
@@ -88,17 +88,20 @@ public class InterfaceInicial extends Pagina {
 
 		vendas.getChildren().add(conteudoVendas);
 
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				atualizaDados();
-			}
-		});
+		atualizaEstatisticas();
 
 		super.layout.conteudo.getChildren().add(vendas);
 	}
 
-	private void atualizaDados() {
-		
+
+	/**
+	* Método responsável por atualizar os dados estatísticos de  venda.
+	*/
+	private void atualizaEstatisticas() {
+		operadorVendas.atualizaEstatisticas();
+		qtdHoje.setText(String.valueOf(operadorVendas.getQtdVendasHoje()) + " itens");
+		valHoje.setText(Conversor.DoubleParaPreco(operadorVendas.getTotVendasHoje(), true));
+		qtdMes.setText(String.valueOf(operadorVendas.getQtdVendasMes()) + " itens");
+		valMes.setText(Conversor.DoubleParaPreco(operadorVendas.getTotVendasMes(), true));
 	}
 }

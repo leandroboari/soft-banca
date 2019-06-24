@@ -6,7 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 
 /**
-* Descrição da classe.
+* Classe com os elementos que compõem o layout base do sistema.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Layout {
@@ -32,10 +35,8 @@ public class Layout {
 	public Button btnConfiguracoes;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param stage stage da interface.
 	*/
 
 	public Layout(Stage stage) {
@@ -52,10 +53,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Barra lateral esquerda contendo o menu.
 	*/
 
 	private void barraLateral() {
@@ -64,10 +62,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Logomarca do sistema.
 	*/
 
 	private void logo() {
@@ -79,10 +74,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Listagem de botões de navegação.
 	*/
 
 	private void menu() {
@@ -113,10 +105,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Cabeçalho do conteúdo da interface.
 	*/
 
 	private void cabecalho() {
@@ -125,10 +114,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Título da página.
 	*/
 
 	private void titulo() {
@@ -138,10 +124,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Conteúdo onde serão exibidas as páginas.
 	*/
 
 	private void conteudo() {
@@ -150,10 +133,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Constrói corpo do conteudo.
 	*/
 
 	private void corpo() {
@@ -163,10 +143,7 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Agrupagem de barra lateral e conteúdo.
 	*/
 
 	private void principal() {
@@ -176,13 +153,9 @@ public class Layout {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Inicia a janela.
 	*/
 
-	// Cena do aplicativo
 	private void cena() {
 		cena = new Scene(principal, 900, 600);
 		cena.getStylesheets().add("styles.css");

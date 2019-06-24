@@ -1,7 +1,10 @@
 import javafx.scene.control.*;
 
 /**
-* Descrição da classe.
+* Superclasse com os elementos que compõem uma página.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Pagina {
@@ -9,10 +12,8 @@ public class Pagina {
 	protected Layout layout;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param layout
 	*/
 
 	public Pagina(Layout layout) {
@@ -20,25 +21,19 @@ public class Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera título da página.
+	* @param titulo
 	*/
 
-	// Método para alterar título
 	protected void alteraTitulo(String titulo) {
 		layout.titulo.setText(titulo);
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Seleciona botão que corresponde a página atual.
+	* @param btn
 	*/
 
-	// Método ao clicar nos botões
 	protected void selecionaBotao(Button btn) {
 		layout.btnInicial.getStyleClass().remove("menuBotaoSelecionado");
 		layout.btnCaixa.getStyleClass().remove("menuBotaoSelecionado");
@@ -50,10 +45,7 @@ public class Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Limpa conteúdo ao transitar páginas.
 	*/
 
 	// Limpa conteúdo da página

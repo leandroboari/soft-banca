@@ -17,7 +17,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 
 /**
-* Descrição da classe.
+* Classe com os elementos de interface da Página de Caixa.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class InterfaceCaixa extends Pagina {
@@ -35,10 +38,10 @@ public class InterfaceCaixa extends Pagina {
 	private Text tTotal;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param layout Layout do sistema.
+	* @param operadorVendas Operador de Vendas.
+	* @param operadorEstoque Operador do Estoque.
 	*/
 
 	public InterfaceCaixa(Layout layout, OperadorVendas operadorVendas, OperadorEstoque operadorEstoque) {
@@ -193,9 +196,7 @@ public class InterfaceCaixa extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* @param filtro Preenche a tabela com Produtos que contenham determinada ID ou título.
 	*/
 
 	private void realizarBusca(String filtro) {
@@ -210,10 +211,8 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Exibe diálogo solicitando a quantidade de itens a ser inserido do produto selecionado.
+	* @param produto Produto selecionado na tabela.
 	*/
 
 	private void solicitaQuantidade(Produto produto) {
@@ -279,10 +278,7 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Limpa tabela e campo de busca.
 	*/
 
 	private void limpaBusca() {
@@ -291,10 +287,7 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualiza tabela de caixa de acordo com a lista do operador de vendas.
 	*/
 
 	private void atualizaCaixa() {
@@ -305,10 +298,9 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Inserção no caixa.
+	* @param produto Produto a ser inserido.
+	* @param quantidade Quantidade do produto.
 	*/
 
 	private void insereCaixa(Produto produto, int quantidade) {
@@ -343,10 +335,7 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualiza campo que representa o total do caixa.
 	*/
 
 	private void atualizaTotal() {
@@ -354,10 +343,7 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Diálogo questionando o tipo de pagamento a ser realizado.
 	*/
 
 	private void solicitaPagamento() {
@@ -397,28 +383,8 @@ public class InterfaceCaixa extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
-	*/
-
-	private void novaVenda() {
-		venda = new Venda();
-		Platform.runLater(new Runnable() {
-			@Override public void run() {
-				limpaBusca();
-				atualizaCaixa();
-				atualizaTotal();
-			}
-		});
-	}
-
-	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Ao selecionar um determinado item no caixa, exibe diálogo para remoção deste.
+	* @param produto produto selecionado na tabela.
 	*/
 
 	private void solicitaRemocao(ProdutoVenda produto) {
@@ -485,9 +451,8 @@ public class InterfaceCaixa extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* @param produto Produto a ser removida do caixa.
+	* @param quantidade Quantidade de itens a ser removido do produto em caixa.
 	*/
 
 	private void removeCaixa(ProdutoVenda produto, int quantidade) {
@@ -496,6 +461,21 @@ public class InterfaceCaixa extends Pagina {
 			venda.removeProduto(produto);
 		}
 		venda.atualizaTotal();
+	}
+
+	/**
+	* Ao encerrar uma venda, limpa tabela, formulários e elementos para uma nova venda.
+	*/
+
+	private void novaVenda() {
+		venda = new Venda();
+		Platform.runLater(new Runnable() {
+			@Override public void run() {
+				limpaBusca();
+				atualizaCaixa();
+				atualizaTotal();
+			}
+		});
 	}
 
 }

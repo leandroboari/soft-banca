@@ -9,9 +9,13 @@ import java.io.IOException;
 import java.lang.ClassNotFoundException;
 import java.io.Serializable;
 import java.util.Date;
+import java.time.LocalDate;
 
 /**
-* Descrição da classe.
+* Classe resposável por operar listas e armazenamento de vendas.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class OperadorVendas implements Serializable {
@@ -28,11 +32,14 @@ public class OperadorVendas implements Serializable {
 	transient private ArrayList<Venda> lista;
 	private int lastId;
 
+	// Estatísticas de Venda
+	transient private int qtdVendasHoje;
+	transient private double totVendasHoje;
+	transient private int qtdVendasMes;
+	transient private double totVendasMes;
+
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
 	*/
 
 	public OperadorVendas() {
@@ -45,10 +52,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar listas e operador para arquivos binários para persistência de dados.
 	*/
 
 	public void salvar() {
@@ -57,10 +61,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar lista de vendas para arquivo binário.
 	*/
 
 	public void salvarListaArmazenamento() {
@@ -80,10 +81,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Resgata lista de vendas do arquivo binário.
 	*/
 
 	@SuppressWarnings("unchecked")
@@ -105,10 +103,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar operador de vendas para arquivo binário.
 	*/
 
 	public void salvarOperadorArmazenamento() {
@@ -129,10 +124,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Resgatar operador de vendas do arquivo binário.
 	*/
 
 	@SuppressWarnings("unchecked")
@@ -154,10 +146,8 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Inserir nova venda na lista.
+	* @param venda Venda a ser inserida.
 	*/
 
 	private void inserirVenda(Venda venda) {
@@ -165,10 +155,9 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Alterar o status da venda para finalizado.
+	* @param venda Venda a ser modificada.
+	* @param meioPagamento Meio de pagamento escolhido.
 	*/
 
 	public void finalizarVenda(Venda venda, String meioPagamento) {
@@ -177,10 +166,8 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Preenche tabela com os valores da lista.
+	* @param tabela tabela a ser preenchida.
 	*/
 
 	public void preencherTabela(TableView<Venda> tabela) {
@@ -191,10 +178,7 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualiza total de acordo com as vendas listadas.
 	*/
 
 	public void atualizaTotal() {
@@ -205,12 +189,102 @@ public class OperadorVendas implements Serializable {
 		totalArredondado = Conversor.DoubleParaPreco(total, true);
 	}
 
+	/**
+	* Atualiza estatísticas de acordo com as vendas listadas.
+	*/
+
+	public void atualizaEstatisticas() {
+		qtdVendasHoje = 0;
+		totVendasHoje = 0;
+		qtdVendasMes = 0;
+		totVendasMes = 0;
+		for (Venda venda: lista) {
+			if(verificaHoje(venda.getDataHora())) {
+				qtdVendasHoje += venda.getItens();
+				totVendasHoje += venda.getTotal();
+			}
+			if(verificaMes(venda.getDataHora())) {
+				qtdVendasMes += venda.getItens();
+				totVendasMes += venda.getTotal();
+			}
+		}
+	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Verificação se a data é o dia atual 
+	* @param data Data a ser analisada
+	* @return boolean true se a data representa o dia atual. 
+	*/
+
+	private boolean verificaHoje(String data) {
+		LocalDate hoje = LocalDate.now();
+		int anoHoje = hoje.getYear();
+		int mesHoje = hoje.getMonthValue();
+		int diaHoje = hoje.getDayOfMonth();
+		LocalDate novaData = Conversor.StringParaDataHora(data);
+		int anoData = novaData.getYear();
+		int mesData = novaData.getMonthValue();
+		int diaData = novaData.getDayOfMonth();
+		if(anoHoje == anoData && mesHoje == mesData && diaHoje == diaData) return true;
+		return false;
+	}
+
+	/**
+	* Verificação se a data é o mês atual
+	* @param data Data a ser analisada
+	* @return boolean true se a data representa o mês atual. 
+	*/
+
+	private boolean verificaMes(String data) {
+		LocalDate hoje = LocalDate.now();
+		int anoHoje = hoje.getYear();
+		int mesHoje = hoje.getMonthValue();
+		LocalDate novaData = Conversor.StringParaDataHora(data);
+		int anoData = novaData.getYear();
+		int mesData = novaData.getMonthValue();
+		if(anoHoje == anoData && mesHoje == mesData) return true;
+		return false;
+	}
+
+	/**
+	* Resgata estatística de vendas hoje.
+	* @return int número de vendas.
+	*/
+
+	public int getQtdVendasHoje() {
+		return qtdVendasHoje;
+	}
+
+	/**
+	* Resgata estatística de vendas hoje.
+	* @return double valor total de vendas.
+	*/
+
+	public double getTotVendasHoje() {
+		return totVendasHoje;
+	}
+
+	/**
+	* Resgata estatística de vendas neste mês.
+	* @return int número de vendas.
+	*/
+
+	public int getQtdVendasMes() {
+		return qtdVendasMes;
+	}
+
+	/**
+	* Resgata estatística de vendas neste mês.
+	* @return double valor total de vendas.
+	*/
+
+	public double getTotVendasMes() {
+		return totVendasMes;
+	}
+
+	/**
+	* Total de vendas arredondado e padronizado.
+	* @return String
 	*/
 
 	public String getTotalArredondado() {
@@ -218,10 +292,8 @@ public class OperadorVendas implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Serialização da classe.
+	* @return String valores a serem descritos.
 	*/
 
 	@Override

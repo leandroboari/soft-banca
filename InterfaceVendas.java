@@ -12,7 +12,10 @@ import javafx.scene.control.ButtonBar.*;
 import javafx.collections.FXCollections;
 
 /**
-* Descrição da classe.
+* Classe com os elementos de interface da Página de Vendas.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class InterfaceVendas extends Pagina {
@@ -25,10 +28,9 @@ public class InterfaceVendas extends Pagina {
 	private Text tTotal;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param layout
+	* @param operadorVendas
 	*/
 
 	public InterfaceVendas(Layout layout, OperadorVendas operadorVendas) {
@@ -112,10 +114,8 @@ public class InterfaceVendas extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Diálogo com as informações da venda.
+	* @param venda Venda a ser coletados dados.
 	*/
 
 	private void verDetalhes(Venda venda) {
@@ -164,10 +164,7 @@ public class InterfaceVendas extends Pagina {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualiza texto que contém o valor do total de vendas.
 	*/
 
 	private void atualizaTotal() {

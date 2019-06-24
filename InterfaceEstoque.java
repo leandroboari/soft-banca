@@ -10,7 +10,10 @@ import java.util.*;
 import javafx.scene.control.ButtonBar.*;
 
 /**
-* Descrição da classe.
+* Classe com os elementos de interface da Página de Estoque.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class InterfaceEstoque extends Pagina {
@@ -22,10 +25,9 @@ public class InterfaceEstoque extends Pagina {
 	private TableView<Produto> tabela;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
+	* @param layout Layout do sistema.
+	* @param operadorEstoque Operador do Estoque.
 	*/
 
 	public InterfaceEstoque(Layout layout, OperadorEstoque operadorEstoque) {
@@ -157,9 +159,7 @@ public class InterfaceEstoque extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* @param produto
 	*/
 
 	private void editarProduto(Produto produto) {
@@ -259,9 +259,7 @@ public class InterfaceEstoque extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* @param produto
 	*/
 
 	private void inserirEstoque(Produto produto) {
@@ -298,9 +296,6 @@ public class InterfaceEstoque extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
 	*/
 
 	private void atualizarTabela() {
@@ -312,9 +307,7 @@ public class InterfaceEstoque extends Pagina {
 
 	/**
 	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* @param filtro
 	*/
 
 	private void realizarBusca(String filtro) {

@@ -9,7 +9,10 @@ import java.lang.ClassNotFoundException;
 import java.io.Serializable;
 
 /**
-* Descrição da classe.
+* Classe resposável por operar listas e armazenamento de produtos que compõem o estoque.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class OperadorEstoque implements Serializable {
@@ -23,10 +26,7 @@ public class OperadorEstoque implements Serializable {
 	private int lastId;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
 	*/
 
 	public OperadorEstoque() {
@@ -38,10 +38,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar listas e operador para arquivos binários para persistência de dados.
 	*/
 
 	public void salvar() {
@@ -50,10 +47,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar lista de produtos para arquivo binário.
 	*/
 
 	public void salvarListaArmazenamento() {
@@ -73,10 +67,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Resgata lista de produtos do arquivo binário.
 	*/
 
 	@SuppressWarnings("unchecked")
@@ -98,10 +89,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Salvar operador de produtos para arquivo binário.
 	*/
 
 	public void salvarOperadorArmazenamento() {
@@ -122,10 +110,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Resgatar operador de produtos do arquivo binário.
 	*/
 
 	@SuppressWarnings("unchecked")
@@ -147,10 +132,7 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Adicionar um novo produto para a lista.
 	*/
 
 	public void adicionar(Produto produto) {
@@ -158,10 +140,12 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Editar um produto.
+	* @param produto Produto a ser editado.
+	* @param titulo Novo título.
+	* @param preco Novo preço.
+	* @param estoque Nova quantidade de estoque.
+	* @param dataEntrada Nova data de entrada.
 	*/
 
 	public void editar(Produto produto, String titulo, double preco, int estoque, String dataEntrada) {
@@ -179,10 +163,8 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Remover produto da lista.
+	* @param produto Produto a ser removido.
 	*/
 
 	public void remover(Produto produto) {
@@ -190,10 +172,8 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualizar estoque ao ter sido realizada uma venda.
+	* @param venda Venda realizada.
 	*/
 
 	public void novaVenda(Venda venda) {
@@ -209,10 +189,8 @@ public class OperadorEstoque implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Serialização da classe.
+	* @return String valores a serem descritos.
 	*/
 
 	@Override

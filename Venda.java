@@ -2,7 +2,10 @@ import java.util.*;
 import java.io.Serializable;
 
 /**
-* Descrição da classe.
+* Classe que caracteriza os atributos em métodos de uma Venda.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Venda implements Serializable {
@@ -18,9 +21,7 @@ public class Venda implements Serializable {
 	private String meioPagamento;
 
 	/**
-	* Descrição do método
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor principal da classe.
 	*/
 
 	public Venda() {
@@ -30,10 +31,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor para referenciar a última ID estatitcamente.
+	* @param lastId
 	*/
 
 	public Venda(int lastId) {
@@ -41,10 +40,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Finalizar a condição de uma venda para finalizada.
+	* @param meioPagamento Meio de Pagamento.
 	*/
 
 	public void finalizar(String meioPagamento) {
@@ -58,10 +55,9 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Insere uma quantidade de itens na venda 
+	* @param produto Produto a ser modificado.
+	* @param quantidade Quantidade a ser inserida.
 	*/
 
 	public void inserirQuantidade(Produto produto, int quantidade) {
@@ -71,10 +67,9 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Inserir novo produto na venda.
+	* @param produto Produto a ser inserido.
+	* @param quantidade Quantidade a ser inserida.
 	*/
 
 	public void inserirProduto(Produto produto, int quantidade) {
@@ -89,10 +84,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Remover um produto da venda.
+	* @param produto Produto a ser removido.
 	*/
 
 	public void removeProduto(ProdutoVenda produto) {
@@ -100,10 +93,7 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Atualiza total da venda de acordo com a lista de produtos.
 	*/
 
 	public void atualizaTotal() {
@@ -115,10 +105,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Verifica se a venda está vazia de produtos.
+	* @return boolean
 	*/
 
 	public boolean vazia() {
@@ -127,10 +115,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa a Identificação da venda.
+	* @return int
 	*/
 
 	public int getId() {
@@ -138,10 +124,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa a quantidade de itens de um determinado produto.
+	* @return int
 	*/
 
 	public int getItens() {
@@ -149,10 +133,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa o meio de pagamento para a venda.
+	* @return String
 	*/
 
 	public String getMeioPagamento() {
@@ -160,10 +142,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera meio de pagamento para a venda.
+	* @param meioPagamento Meio de pagamento para a venda.
 	*/
 
 	public void setMeioPagamento(String meioPagamento) {
@@ -171,10 +151,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa o total da venda.
+	* @return double
 	*/
 
 	public double getTotal() {
@@ -182,10 +160,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera o total da venda.
+	* @param total total da venda.
 	*/
 
 	public void setTotal(double total) {
@@ -193,10 +169,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa o total arredondado da venda.
+	* @return String
 	*/
 
 	public String getTotalArredondado() {
@@ -204,10 +178,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera o total arredondado da venda.
+	* @param total
 	*/
 
 	public void setTotalArredondado(String total) {
@@ -215,10 +187,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa a data e hora que a venda foi realizada.
+	* @return String Data e hora que a venda foi realizada.
 	*/
 
 	public String getDataHora() {
@@ -226,10 +196,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera a data e hora que a venda foi realizada.
+	* @param dataHora Data e hora que a venda foi realizada.
 	*/
 
 	public void setDataHora(String dataHora) {
@@ -237,10 +205,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Lista de produtos inseridos na venda.
+	* @return ArrayList<ProdutoVenda>
 	*/
 
 	public ArrayList<ProdutoVenda> getLista() {
@@ -248,10 +214,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa a última Identidade de venda.
+	* @return int
 	*/
 
 	public static int getLastId() {
@@ -259,10 +223,8 @@ public class Venda implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Serialização da classe.
+	* @return String valores a serem descritos.
 	*/
 
 	@Override

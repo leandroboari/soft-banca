@@ -3,17 +3,19 @@ import java.time.format.DateTimeFormatter;
 import javafx.scene.control.*;
 
 /**
-* Descrição da classe.
+* Classe que valida com segurança os formulários da interface.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class ValidaFormulario {
 	public static DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Verifica se um campo de texto é nulo.
+	* @param campo
+	* @return boolean
 	*/
 
 	public static boolean nulo(TextField campo) {
@@ -23,10 +25,9 @@ public class ValidaFormulario {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Veririca se um campo de data é nulo.
+	* @param campo
+	* @return boolean
 	*/
 
 	public static boolean nulo(DatePicker campo) {
@@ -36,10 +37,9 @@ public class ValidaFormulario {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Verifica se um campo tem um número inteiro.
+	* @param campo
+	* @return boolean
 	*/
 
 	public static boolean inteiro(TextField campo) {
@@ -55,10 +55,9 @@ public class ValidaFormulario {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Verifica se o campo é um número decimal.
+	* @param campo
+	* @return boolean
 	*/
 
 	public static boolean decimal(TextField campo) {

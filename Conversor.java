@@ -10,7 +10,10 @@ import java.time.DateTimeException;
 import java.util.Locale;
 
 /**
-* Descrição da classe.
+* Classe que converte alguns tipos de dados com segurança.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Conversor {
@@ -18,12 +21,12 @@ public class Conversor {
 	// Formato padrão de data
 	public static DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	public static DateFormat formataDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	public static DateTimeFormatter formataDataHora2 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 	/**
 	* Método que converte com segurança uma String para Double
 	* @param valor String a ser convertida
 	* @return Double passado pela String
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static double StringParaDouble(String valor) {
@@ -39,7 +42,6 @@ public class Conversor {
 	* Método que converte com segurança uma String para Integer
 	* @param valor String a ser convertida
 	* @return int Passado pela String
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static int StringParaInt(String valor) {
@@ -55,7 +57,6 @@ public class Conversor {
 	* Método que converte com segurança uma String para Data
 	* @param valor String a ser convertida
 	* @return LocalDate passado pela String
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static LocalDate StringParaData(String valor) {
@@ -68,10 +69,25 @@ public class Conversor {
 	}
 
 	/**
+	* Método que converte com segurança uma String para Data
+	* @param valor String a ser convertida
+	* @return LocalDate passado pela String
+	*/
+
+	public static LocalDate StringParaDataHora(String valor) {
+		try {
+			return LocalDate.parse(valor, formataDataHora2);
+		} catch (DateTimeException nfe) {
+			Alerta.erro("A conversão do texto para data falhou.");
+			return null;
+		}
+	}
+
+
+	/**
 	* Método que converte com segurança uma Data para String
 	* @param data Data a ser convertida
 	* @return String passado pela Data
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static String DataParaString(LocalDate data) {
@@ -88,7 +104,6 @@ public class Conversor {
 	* Método que converte com segurança uma Data para String contendo Data e Hora
 	* @param data Data a ser convertida
 	* @return String passado pela Data
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static String DataHoraParaString(Date data) {
@@ -105,7 +120,6 @@ public class Conversor {
 	* Método que converte com segurança um Double para Valor de Preço com arredondamento
 	* @param valor Double a ser convertido
 	* @return String no formato de Preço
-	* @author Leandro Boari Naves Silva
 	*/
 
 	public static String DoubleParaPreco(Double valor, boolean comCifrao) {

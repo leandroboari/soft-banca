@@ -5,16 +5,17 @@ import javafx.event.*;
 import java.util.*;
 
 /**
-* Descrição da classe.
+* Classe de criação de diálogos de alertas.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Alerta {
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Exibe um diálogo de erro.
+	* @param texto Texto a ser exibido.
 	*/
 
 	public static void erro(String texto) {
@@ -26,10 +27,8 @@ public class Alerta {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Exibe um diálogo de erro com uma lista.
+	* @param erros Lista de erros a ser exibido.
 	*/
 
 	public static void listaErros(ArrayList<String> erros) {
@@ -51,10 +50,9 @@ public class Alerta {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Exibe um diálogo de confirmação.
+	* @param texto Questionamento a ser exibido.
+	* @return Boolean Resposta do usuário (sim = true, não = false).
 	*/
 
 	public static Boolean confirmacao(String texto) {

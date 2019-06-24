@@ -2,7 +2,10 @@ import java.util.*;
 import java.io.Serializable;
 
 /**
-* Descrição da classe.
+* Classe que caracteriza os atributos em métodos de um Produto.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Produto implements Serializable {
@@ -17,10 +20,12 @@ public class Produto implements Serializable {
 	protected String dataEntrada;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor para caso o produto já contenha uma ID.
+	* @param id ID que representa a identidade do produto.
+	* @param titulo Título que representa o produto.
+	* @param preco Preço do produto.
+	* @param qtdEstoque Quantidade em estoque do produto.
+	* @param dataEntrada Data em que foi feito a última inserção em estoque.
 	*/
 
 	public Produto(int id, String titulo, double preco, int qtdEstoque, String dataEntrada) {
@@ -33,10 +38,11 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor para um novo produto.
+	* @param titulo Título que representa o produto.
+	* @param preco Preço do produto.
+	* @param qtdEstoque Quantidade em estoque do produto.
+	* @param dataEntrada Data em que foi feito a última inserção em estoque.
 	*/
 
 	public Produto(String titulo, double preco, int qtdEstoque, String dataEntrada) {
@@ -49,10 +55,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Construtor para referenciar a última ID estatitcamente.
+	* @param lastId
 	*/
 
 	public Produto(int lastId) {
@@ -60,10 +64,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* ID do produto.
+	* @return int Identificação do produto.
 	*/
 
 	public int getId() {
@@ -71,10 +73,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera ID do produto.
+	* @param id Identificação do produto.
 	*/
 
 	private void setId(int id) {
@@ -82,10 +82,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa Título do produto.
+	* @return String titulo
 	*/
 
 	public String getTitulo() {
@@ -93,10 +91,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera Título do produto.
+	* @param titulo Título do produto.
 	*/
 
 	public void setTitulo(String titulo) {
@@ -104,10 +100,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa Quantidade em Estoque
+	* @return int qtdEstoque
 	*/
 
 	public int getQtdEstoque() {
@@ -115,10 +109,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera Quantidade em Estoque.
+	* @param qtdEstoque Quantidade em Estoque.
 	*/
 
 	public void setQtdEstoque(int qtdEstoque) {
@@ -126,10 +118,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa Preço do produto.
+	* @return double Preço do produto.
 	*/
 
 	public double getPreco() {
@@ -137,10 +127,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera Preço do produto.
+	* @param preco Preço do produto.
 	*/
 	public void setPreco(double preco) {
 		this.preco = preco;
@@ -148,10 +136,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa Preço do produto arredondado.
+	* @return String Preço do produto arredondado.
 	*/
 
 	public String getPrecoArredondado() {
@@ -159,10 +145,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera Preço do produto arredondado.
+	* @param precoArredondado Preço do produto arredondado.
 	*/
 
 	public void setPrecoArredondado(String precoArredondado) {
@@ -170,10 +154,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa Data de Entrada do produto.
+	* @return String Data de Entrada do produto.
 	*/
 
 	public String getDataEntrada() {
@@ -181,10 +163,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Altera Data de Entrada do produto.
+	* @param dataEntrada Data de Entrada do produto.
 	*/
 	
 	public void setDataEntrada(String dataEntrada) {
@@ -192,10 +172,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Inserir estoque.
+	* @param quantidade Quantidade a ser inserida em estoque.
 	*/
 
 	public void inserirEstoque(int quantidade) {
@@ -203,10 +181,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Retirar estoque.
+	* @param quantidade uantidade a ser removeida em estoque.
 	*/
 
 	public void retirarEstoque(int quantidade) {
@@ -214,10 +190,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Acessa última ID
+	* @return int última ID
 	*/
 
 	public static int getLastId() {
@@ -225,10 +199,8 @@ public class Produto implements Serializable {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Serialização da classe.
+	* @return String valores a serem descritos.
 	*/
 
 	@Override

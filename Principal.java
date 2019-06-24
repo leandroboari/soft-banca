@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
-* Descrição da classe.
+* Classe de inicialização da interface e instanciamento das demais classes.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
 */
 
 public class Principal extends Application {
@@ -22,22 +25,17 @@ public class Principal extends Application {
 	private OperadorEstoque operadorEstoque;
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Main function - Executa a interface.
+	* @param args Argumentos da Main.
 	*/
 
-	// Classe principal
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Ao iniciar a janela, executa procedimentos iniciais.
+	* @param stage Estado da página.
 	*/
 
 	@Override
@@ -46,14 +44,14 @@ public class Principal extends Application {
 		// Instancia Layout
 		layout = new Layout(stage);
 
-		// Carrega Página Inicial
-		pagina = new InterfaceInicial(layout, operadorVendas);
-
 		// Instancia operador de vendas
 		operadorVendas = new OperadorVendas();
 
 		// Instancia operador de produtos
 		operadorEstoque = new OperadorEstoque();
+
+		// Carrega Página Inicial
+		pagina = new InterfaceInicial(layout, operadorVendas);
 
 		// Navegação
 		layout.btnInicial.setOnAction(e -> {
@@ -79,10 +77,7 @@ public class Principal extends Application {
 	}
 
 	/**
-	* Descrição do método
-	* @param
-	* @return
-	* @author Leandro Boari Naves Silva
+	* Ao fechar a página, salva dados para persistência.
 	*/
 
 	@Override
