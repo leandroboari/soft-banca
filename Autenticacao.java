@@ -6,6 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
 
+/**
+* Classe de autenticação da senha.
+* @author Leandro Boari Naves Silva
+* @author Clever Oliveira
+* @author João Paulo Uba
+*/
+
 public class Autenticacao {
 
 	private String senha;
